@@ -1,0 +1,36 @@
+.App{
+    background-color: none;
+    
+}
+.weather {
+    position: relative;
+}
+.weather_info {
+    position: absolute;
+    top: 20px;
+    left: 16px;
+    color: white;
+    font-size: 36px;
+}
+.weather_image {
+    width: 100%;
+}
+.card_section{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px;
+}
+.card_name{
+    text-align: center;
+}
+.card_image{
+    width: 328px; 
+    height: 328px;
+    border-radius: 10px;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
