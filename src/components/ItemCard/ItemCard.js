@@ -1,6 +1,7 @@
+import "../ModalWithForm/ModalWithForm.css";
 const ItemCard = ({ item, onSelectCard }) => {
   return (
-    <div>
+    <div className="card">
       <div>
         <img src={item.link} className="card_image" onClick={()=>onSelectCard(item)} />
       </div>

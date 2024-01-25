@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/src/fonts/CabinetGrotesk-Medium.woff");
+}
+.App {
+  background: rgba(243, 243, 243, 1);
+  min-height: 100vh;
+  font-family: "Cabinet Grotesk", Helvetica, sans-serif;
+  padding: 32px 40px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.weather {
+  position: relative;
+  max-height: 80px;
+}
+.weather_info {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  color: white;
+  font-size: 36px;
+}
+.weather_image {
+  width: 100%;
+}
+.weather_title {
+  margin: 40px 0 34px;
+}
+.card_section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+}
+.card_items {
+  max-width: 325px;
+  max-height: 328px;
+  display: flex;
+  gap: 20px;
+}
+.card {
+  display: flex;
+
+  flex-direction: column-reverse;
+  align-items: center;
+}
+.card_name {
+  text-align: center;
+  width: 73px;
+  height: 24px;
+  position: relative;
+  top: 30px;
+  background-color: white;
+  border-radius: 2px;
+}
+.card_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+}

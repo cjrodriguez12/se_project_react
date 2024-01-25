@@ -4,10 +4,10 @@ import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useEffect, useState } from "react";
 import ItemModal from "../ItemModal/ItemModal";
-import { getForecastWeather, parseWeatherData } from "../util/weatherApi";
+import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
+import Footer from "../Footer/Footer";
 
 function App() {
-  const weatherTemp = "65";
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
@@ -26,47 +26,44 @@ function App() {
   useEffect(() => {
     getForecastWeather().then((data) => {
       const temperature = parseWeatherData(data);
-      console.log(temperature);
       setTemp(temperature);
     });
   }, []);
-  console.log(temp);
   return (
     <div className="App">
+      <div>
       <Header onCreateModal={handleCreateModal} />
       <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+      </div>
       {activeModal === "create" && (
         <ModalWithForm title="New Garment" onClose={handleCloseModal}>
-          <label>
-            name
-            <input type="text" name="name" minLength="1" maxLength="30"></input>
+          <label className="modal_form-label">
+            Name
+            <input className="modal_form-input" placeholder="Name" type="text" name="name" minLength="1" maxLength="30"></input>
           </label>
-          <label>
+          <label className="modal_form-label">
             Image
-            <input type="url" name="link" minLength="1" maxLength="30"></input>
+            <input className="modal_form-input" placeholder="Image URL" type="url" name="link" minLength="1" maxLength="30"></input>
           </label>
-          <p>Select Weather Type:</p>
-          <div>
-            <div>
+          
+          <div className="modal_radio">
+            <p className="modal_radio-title">Select Weather Type:</p>
+            <div className="modal_radio-input">
               <input type="radio" id="hot" value="hot" />
               <label>Hot</label>
             </div>
-            <div>
+            <div className="modal_radio-input">
               <input type="radio" id="warm" value="warm" />
               <label>Warm</label>
             </div>
-            <div>
+            <div className="modal_radio-input">
               <input type="radio" id="cold" value="cold" />
               <label>Cold</label>
             </div>
           </div>
         </ModalWithForm>
       )}
-
-      <footer className="footer">
-        <div>Developed by Charlie Rodriguez</div>
-        <div>2024</div>
-      </footer>
+        <Footer/>
       {activeModal === "preview" && (
         <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
       )}

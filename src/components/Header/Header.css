@@ -1,0 +1,30 @@
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    padding-bottom: 28px;
+  }
+  .header__logo{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  }
+  .header__avatar-logo{
+  display: flex;
+  align-items: center;
+  }
+  .header__button {
+    border-style: none;
+    padding: 0;
+  }
+  .header__avatar-info{
+    padding-left: 12px;
+  }
+  .header__avatar-img{
+    padding-left: 12px;
+  }
+  .header__avatar-name{
+    margin-left: 20px;
+  }

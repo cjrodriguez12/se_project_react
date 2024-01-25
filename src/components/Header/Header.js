@@ -9,19 +9,19 @@ const Header = ({ onCreateModal }) => {
       <div className="header__logo">
         <div>
           {" "}
-          <img src={require("../images/Logo.svg").default} alt="logo" />{" "}
+          <img src={require("../../images/Logo.svg").default} alt="logo" />{" "}
         </div>
         <div className="date">{currentDate}</div>
       </div>
       <div className="header__avatar-logo">
         <div>
-          <button type="text" onClick={onCreateModal}>
-            Add New Clothes
+          <button className="header__button" type="text" onClick={onCreateModal}>
+            + Add Clothes
           </button>
         </div>
-        <div>Name</div>
+        <div className="header__avatar-name">Charlie Rodriguez</div>
         <div>
-          <img src="/images/avatar.svg" alt="avatar-logo" />
+          <img src={require("../../images/avatar.svg").default} className="header__avatar-img" />
         </div>
       </div>
     </header>
