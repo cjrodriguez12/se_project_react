@@ -9,7 +9,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
-.modal_content {
+.modal__content {
   background-color: white;
   max-width: 496px;
   width: 100%;

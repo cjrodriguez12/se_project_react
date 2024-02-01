@@ -27,43 +27,66 @@ function App() {
     getForecastWeather().then((data) => {
       const temperature = parseWeatherData(data);
       setTemp(temperature);
+    }
+    ).catch((error)=>{
+      Promise.reject(`Error: ${error.status}`);
     });
   }, []);
   return (
     <div className="App">
       <div>
-      <Header onCreateModal={handleCreateModal} />
-      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+        <Header onCreateModal={handleCreateModal} />
+        <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
       </div>
       {activeModal === "create" && (
         <ModalWithForm title="New Garment" onClose={handleCloseModal}>
           <label className="modal_form-label">
             Name
-            <input className="modal_form-input" placeholder="Name" type="text" name="name" minLength="1" maxLength="30"></input>
+            <input
+              className="modal_form-input"
+              placeholder="Name"
+              type="text"
+              name="name"
+              minLength="1"
+              maxLength="30"
+            ></input>
           </label>
           <label className="modal_form-label">
             Image
-            <input className="modal_form-input" placeholder="Image URL" type="url" name="link" minLength="1" maxLength="30"></input>
+            <input
+              className="modal_form-input"
+              placeholder="Image URL"
+              type="url"
+              name="link"
+              minLength="1"
+              maxLength="30"
+            ></input>
           </label>
-          
+
           <div className="modal_radio">
             <p className="modal_radio-title">Select Weather Type:</p>
             <div className="modal_radio-input">
-              <input type="radio" id="hot" value="hot" />
-              <label>Hot</label>
+              <label>
+                <input name="radio" type="radio" id="hot" value="hot" />
+                Hot
+              </label>
             </div>
             <div className="modal_radio-input">
-              <input type="radio" id="warm" value="warm" />
-              <label>Warm</label>
+              <label>
+                <input name="radio" type="radio" id="warm" value="warm" />
+                Warm
+              </label>
             </div>
             <div className="modal_radio-input">
-              <input type="radio" id="cold" value="cold" />
-              <label>Cold</label>
+              <label>
+                <input name="radio" type="radio" id="cold" value="cold" />
+                Cold
+              </label>
             </div>
           </div>
         </ModalWithForm>
       )}
-        <Footer/>
+      <Footer />
       {activeModal === "preview" && (
         <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
       )}
