@@ -29,7 +29,7 @@ function App() {
       setTemp(temperature);
     }
     ).catch((error)=>{
-      Promise.reject(`Error: ${error.status}`);
+      console.error(`Error: ${error.status}`);
     });
   }, []);
   return (
