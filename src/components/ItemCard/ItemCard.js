@@ -2,8 +2,9 @@ import "../ModalWithForm/ModalWithForm.css";
 const ItemCard = ({ item, onSelectCard }) => {
   return (
     <ul className="card">
-      <li key={item.id}>
+      <li>
         <img
+          alt="item"
           src={item.link}
           className="card_image"
           onClick={() => onSelectCard(item)}
