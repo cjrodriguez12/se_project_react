@@ -5,7 +5,7 @@ const ItemModal = ({ selectedCard, onClose }) => {
       <div className="modal_preview">
         <div className="modal_preview-content">
           
-            <img className="modal_preview-image" src={selectedCard.link} />
+            <img className="modal_preview-image" src={selectedCard.link} alt={selectedCard.name} />
             <div className="modal_preview-name">{selectedCard.name}</div>
           
         </div>
