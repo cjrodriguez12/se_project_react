@@ -1,27 +1,46 @@
 import React, { useContext, useState } from "react";
 import "./ToggleSwitch.css";
-import {CurrentTemperatureUnitContext} from '../../contexts/CurrentTempatureUnitContext';
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 const ToggleSwitch = () => {
-  //const [currentTempatureUnit, handleToggleChange] = useState("C");
-//   const handleChange = (e) => {
-//     if (currentTempatureUnit === "C") handleToggleChange("F");
-//     if (currentTempatureUnit === "F") handleToggleChange("C");
-//   };
-//   console.log(currentTempatureUnit);
-const {currentTempatureUnit, handleToggleSwitchChange} = useContext(CurrentTemperatureUnitContext)
+  //const [currentTemperatureUnit, handleToggleChange] = useState("C");
+  //   const handleChange = (e) => {
+  //     if (currentTemperatureUnit === "C") handleToggleChange("F");
+  //     if (currentTemperatureUnit === "F") handleToggleChange("C");
+  //   };
+  //   console.log(currentTemperatureUnit);
+  const { currentTemperatureUnit, handleToggleSwitchChange } = useContext(
+    CurrentTemperatureUnitContext
+  );
+  console.log(currentTemperatureUnit);
   return (
     <label className="switch">
-      <input className="switch__box" type="checkbox" onChange={handleToggleSwitchChange} />
+      <input
+        className="switch__box"
+        type="checkbox"
+        onChange={handleToggleSwitchChange}
+      />
       <span
         className={
-          currentTempatureUnit === "F"
+          currentTemperatureUnit === "F"
             ? "switch__slider switch__slider-F"
             : "switch__slider switch__slider-C"
         }
       ></span>
-      <p className={`switch__temp-F ${currentTempatureUnit === 'F' && "switch__active"}`}>F</p>
-      <p className={`switch__temp-C ${currentTempatureUnit === 'C' && "switch__active"}`}>C</p>
+      <p
+        className={`switch__temp-F ${
+          currentTemperatureUnit === "F" && "switch__active"
+        }`}
+      >
+        F
+      </p>
+      <p
+        className={`switch__temp-C ${
+          currentTemperatureUnit === "C" && "switch__active"
+        }`}
+      >
+        C
+      </p>
     </label>
   );
 };

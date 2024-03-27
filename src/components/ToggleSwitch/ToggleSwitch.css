@@ -29,19 +29,19 @@
   left: 5px;
 }
 .switch__active {
-    color: white;
-    font-size: 16px;
+  color: white;
+  font-size: 16px;
 }
-.switch__temp-C{
-    position: absolute;
-    top: -7px;
-    left: 14px;
-    color: white;
+.switch__temp-C {
+  position: absolute;
+  top: -7px;
+  left: 14px;
+  color: white;
 }
 
 .switch__temp-F {
-    position: absolute;
-    top: -7px;
-    left: 38px;
-    color: white;
+  position: absolute;
+  top: -7px;
+  left: 38px;
+  color: white;
 }
