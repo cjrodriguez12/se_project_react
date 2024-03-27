@@ -1,6 +1,7 @@
 import "./Header.css";
 import logo from "../../images/Logo.svg";
 import avatar from "../../images/avatar.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 const Header = ({ onCreateModal }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -16,6 +17,7 @@ const Header = ({ onCreateModal }) => {
         <div className="date">{currentDate}</div>
       </div>
       <div className="header__avatar-logo">
+        <ToggleSwitch />
         <div>
           <button className="header__button" type="text" onClick={onCreateModal}>
             + Add Clothes
