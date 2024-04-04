@@ -17,7 +17,7 @@ function Main({ weatherTemp, onSelectCard }) {
     } else if (temp <= 65) {
       return "cold";
     }
-  }, [weatherTemp]);
+  }, [temp]);
 
   const filteredCards = defaultClothingItems.filter((item) => {
     return item.weather.toLocaleLowerCase() === weatherType;
@@ -27,7 +27,8 @@ function Main({ weatherTemp, onSelectCard }) {
       <WeatherCard day={true} type="cloudy" weatherTemp={temp} />
       <section className="card_section" id="card_section">
         <div className="weather_title">
-          Today is {temp} {currentTemperatureUnit} / You may want to wear:
+          Today is {temp} {currentTemperatureUnit} and it is {weatherType} / You
+          may want to wear:
         </div>
         <div className="card_items">
           {filteredCards.map((item) => (
