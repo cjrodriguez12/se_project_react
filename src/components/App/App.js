@@ -8,11 +8,13 @@ import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
+  const [city, setCity] = useState("End Of The World");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleCreateModal = () => {
@@ -36,29 +38,30 @@ function App() {
     getForecastWeather()
       .then((data) => {
         const temperature = parseWeatherData(data);
+        console.log(temperature.location);
         setTemp(temperature);
+        setCity(temperature.location);
       })
       .catch((error) => {
         console.error(`Error: ${error.status}`);
       });
   }, []);
 
-  console.log(currentTemperatureUnit);
-
   return (
     <div className="App">
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <div>
-          <Header onCreateModal={handleCreateModal} />
-          <Switch>
-            <Route exact path="/">
-              <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
-            </Route>
-            <Route path="/profile">Profile</Route>
-          </Switch>
-        </div>
+        <Header onCreateModal={handleCreateModal} location={city} />
+        <Switch>
+          <Route exact path="/">
+            <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+          </Route>
+          <Route path="/profile">
+            <Profile onSelectCard={handleSelectedCard} />
+          </Route>
+        </Switch>
+
         {activeModal === "create" && (
           <AddItemModal
             handleCloseModal={handleCloseModal}

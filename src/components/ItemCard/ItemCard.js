@@ -1,4 +1,3 @@
-import "../ModalWithForm/ModalWithForm.css";
 const ItemCard = ({ item, onSelectCard }) => {
   return (
     <ul className="card">

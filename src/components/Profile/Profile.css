@@ -1,0 +1,40 @@
+.profile {
+  display: flex;
+}
+.profile__sidebar {
+  line-height: 25px;
+}
+.profile__avatar {
+  display: flex;
+  width: 229px;
+  height: 59px;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.profile__avatar-name {
+  width: 157px;
+  height: 25px;
+}
+.profile__avatar-img {
+  width: 59px;
+  height: auto;
+  padding-right: 16px;
+}
+.profile_title {
+  margin: 0;
+}
+.profile__card_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0 0 0 116px;
+}
+.profile__card_items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 325px);
+  gap: 20px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

@@ -20,12 +20,14 @@ export const getForecastWeather = () => {
 };
 export const parseWeatherData = (data) => {
   const main = data.main;
+  const location = data.name;
   const temperature = main && main.temp;
   const weather = {
     temperature: {
       F: Math.round(temperature),
       C: Math.round(((temperature - 32) * 5) / 9),
     },
+    location,
   };
   return weather;
 };

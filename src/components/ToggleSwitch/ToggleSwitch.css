@@ -37,6 +37,8 @@
   top: -7px;
   left: 14px;
   color: white;
+  line-height: 17.34px;
+  font-size: 14px;
 }
 
 .switch__temp-F {
@@ -44,4 +46,6 @@
   top: -7px;
   left: 38px;
   color: white;
+  line-height: 17.34px;
+  font-size: 14px;
 }
