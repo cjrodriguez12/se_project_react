@@ -9,13 +9,26 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile";
+import { getInitialCards } from "../../utils/api.js";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
-  const [city, setCity] = useState("End Of The World");
+  const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
+  useEffect(() => {
+    getInitialCards()
+      .then((data) => {
+        const initialClothes = data;
+        setClothingItems(initialClothes);
+        console.log(initialClothes);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -29,6 +42,7 @@ function App() {
   };
   const onAddItem = (values) => {
     console.log(values);
+    //setClothingItems([item, ...clothingItems]);
   };
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
@@ -38,7 +52,6 @@ function App() {
     getForecastWeather()
       .then((data) => {
         const temperature = parseWeatherData(data);
-        console.log(temperature.location);
         setTemp(temperature);
         setCity(temperature.location);
       })
@@ -52,10 +65,14 @@ function App() {
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <Header onCreateModal={handleCreateModal} location={city} />
+        <Header exact onCreateModal={handleCreateModal} location={city} />
         <Switch>
           <Route exact path="/">
-            <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+            <Main
+              initialClothes={clothingItems}
+              weatherTemp={temp}
+              onSelectCard={handleSelectedCard}
+            />
           </Route>
           <Route path="/profile">
             <Profile onSelectCard={handleSelectedCard} />

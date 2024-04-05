@@ -1,13 +1,11 @@
 import "../Main/Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 import { useMemo, useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherTemp, onSelectCard }) {
+function Main({ weatherTemp, onSelectCard, initialClothes }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  console.log(currentTemperatureUnit);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
   const weatherType = useMemo(() => {
     if (temp >= 86) {
@@ -19,17 +17,17 @@ function Main({ weatherTemp, onSelectCard }) {
     }
   }, [temp]);
 
-  const filteredCards = defaultClothingItems.filter((item) => {
+  const filteredCards = initialClothes.filter((item) => {
     return item.weather.toLocaleLowerCase() === weatherType;
   });
   return (
     <main className="main">
       <WeatherCard day={true} type="cloudy" weatherTemp={temp} />
       <section className="card_section" id="card_section">
-        <div className="weather_title">
+        <p className="weather_title">
           Today is {temp} {currentTemperatureUnit} and it is {weatherType} / You
           may want to wear:
-        </div>
+        </p>
         <div className="card_items">
           {filteredCards.map((item) => (
             <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
