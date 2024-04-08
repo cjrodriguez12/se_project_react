@@ -18,6 +18,7 @@ function App() {
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+
   useEffect(() => {
     getInitialCards()
       .then((data) => {
@@ -40,9 +41,10 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(card);
   };
-  const onAddItem = (values) => {
-    console.log(values);
-    //setClothingItems([item, ...clothingItems]);
+  const onAddItem = (addItem) => {
+    console.log(addItem);
+    setClothingItems([addItem, ...clothingItems]);
+    handleCloseModal();
   };
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
@@ -75,7 +77,10 @@ function App() {
             />
           </Route>
           <Route path="/profile">
-            <Profile onSelectCard={handleSelectedCard} />
+            <Profile
+              initialClothes={clothingItems}
+              onSelectCard={handleSelectedCard}
+            />
           </Route>
         </Switch>
 

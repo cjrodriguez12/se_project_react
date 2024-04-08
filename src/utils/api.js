@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:3001";
+//const headers = { "Content-Type": "application/json" };
 //load cards from server
 export const getInitialCards = () => {
   const Api = fetch(`${baseUrl}/items`).then((res) => {

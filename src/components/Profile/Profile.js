@@ -1,10 +1,9 @@
 import "./Profile.css";
-import { defaultClothingItems } from "../../utils/constants";
 //import React, { useContext, useState } from "react";
 import avatar from "../../images/avatar.svg";
 import ItemCard from "../ItemCard/ItemCard";
 
-const Profile = ({ onSelectCard }) => {
+const Profile = ({ onSelectCard, initialClothes }) => {
   return (
     <section className="profile">
       <div className="profile__sidebar">
@@ -18,7 +17,7 @@ const Profile = ({ onSelectCard }) => {
       <div className="profile__card_section">
         <div className="profile_title">Your Items:</div>
         <div className="profile__card_items">
-          {defaultClothingItems.map((item) => (
+          {initialClothes.map((item) => (
             <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
           ))}
         </div>
