@@ -5,19 +5,16 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   const [name, setName] = useState("");
 
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   };
 
   const [imageUrl, setUrl] = useState("");
   const handleUrlChange = (e) => {
-    console.log(e.target.value);
     setUrl(e.target.value);
   };
 
   const [weather, setType] = useState("");
   const handleWeatherType = (e) => {
-    console.log(e.target.value);
     setType(e.target.value);
   };
 

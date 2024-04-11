@@ -24,7 +24,6 @@ function App() {
       .then((data) => {
         const initialClothes = data;
         setClothingItems(initialClothes);
-        console.log(initialClothes);
       })
       .catch((err) => {
         console.error(err);
@@ -42,7 +41,6 @@ function App() {
     setSelectedCard(card);
   };
   const onAddItem = (addItem) => {
-    console.log(addItem);
     setClothingItems([addItem, ...clothingItems]);
     handleCloseModal();
   };

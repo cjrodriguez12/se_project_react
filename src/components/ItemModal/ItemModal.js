@@ -13,7 +13,9 @@ const ItemModal = ({ selectedCard, onClose }) => {
         </div>
         <div className="modal_preview-weather">
           Weather: {selectedCard.weather}
+          <button className="modal_item-delete">Delete Item</button>
         </div>
+
         <button
           className="modal_preview-close"
           type="button"
