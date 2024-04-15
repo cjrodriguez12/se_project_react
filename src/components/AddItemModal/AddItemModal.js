@@ -77,6 +77,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
               type="radio"
               id="warm"
               value="warm"
+              required
               onChange={handleWeatherType}
             />
             Warm

@@ -2,14 +2,42 @@ const baseUrl = "http://localhost:3001";
 //const headers = { "Content-Type": "application/json" };
 //load cards from server
 export const getInitialCards = () => {
-  const Api = fetch(`${baseUrl}/items`).then((res) => {
+  return fetch(`${baseUrl}/items`).then((res) => {
     if (res.ok) {
       return res.json();
     } else {
       Promise.reject(`Error: ${res.status}`);
     }
   });
-  return Api;
+};
+export const deleteCards = (id) => {
+  /// grab id from card-send id to this api call-delete card from html
+  return fetch(`${baseUrl}/items/${id}`, {
+    method: "DELETE",
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      Promise.reject(`Error: ${res.status}`);
+    }
+  });
+};
+export const postCards = (modalInputs) => {
+  const { name, imageUrl, weather } = modalInputs;
+  return fetch(`${baseUrl}/items`, {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      imageUrl,
+      weather,
+    }),
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      Promise.reject(`Error: ${res.status}`);
+    }
+  });
 };
 // refactor duplicate code i.e authorization and fetch
 //   getCardsById(id) {
@@ -46,18 +74,7 @@ export const getInitialCards = () => {
 //     });
 //   }
 //Post new card to Api
-//   postCards(modalInputs) {
-//     const { place, Url } = modalInputs;
-//     //let id;
-//     return fetch(`${this._baseUrl}/cards`, {
-//       method: "POST",
-//       body: JSON.stringify({
-//         name: place,
-//         link: Url,
-//       }),
-//     }).then((res) => {
-//       return this._handleResponse(res);
-//     });
+
 //   }
 //   deleteCards(id) {
 //     /// grab id from card-send id to this api call-delete card from html

@@ -9,7 +9,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile";
-import { getInitialCards } from "../../utils/api.js";
+import { getInitialCards, deleteCards, postCards } from "../../utils/api.js";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -22,26 +22,43 @@ function App() {
   useEffect(() => {
     getInitialCards()
       .then((data) => {
-        const initialClothes = data;
-        setClothingItems(initialClothes);
+        setClothingItems(data);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
-
-  const handleCreateModal = () => {
-    setActiveModal("create");
-  };
   const handleCloseModal = () => {
     setActiveModal("");
   };
+  const handleDeleteCard = () => {
+    deleteCards(selectedCard._id)
+      .then((response) => {
+        setSelectedCard(null);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    handleCloseModal();
+  };
+  const handleCreateModal = () => {
+    setActiveModal("create");
+  };
+
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
+    console.log(card);
     setSelectedCard(card);
   };
   const onAddItem = (addItem) => {
-    setClothingItems([addItem, ...clothingItems]);
+    postCards(addItem)
+      .then((response) => {
+        console.log(addItem);
+        return setClothingItems([addItem, ...clothingItems]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     handleCloseModal();
   };
   const handleToggleSwitchChange = () => {
@@ -91,7 +108,11 @@ function App() {
         )}
         <Footer />
         {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+          <ItemModal
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            deleteCard={handleDeleteCard}
+          />
         )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
