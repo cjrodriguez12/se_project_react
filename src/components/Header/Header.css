@@ -37,3 +37,7 @@
 .header__avatar-name {
   margin-left: 20px;
 }
+.header__avatar-name:-webkit-any-link {
+  text-decoration: none;
+  color: black;
+}

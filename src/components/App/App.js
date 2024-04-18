@@ -33,13 +33,16 @@ function App() {
   };
   const handleDeleteCard = () => {
     deleteCards(selectedCard._id)
-      .then((response) => {
-        setSelectedCard(null);
+      .then((res) => {
+        const updateClothingItems = clothingItems.filter((item) => {
+          return item._id !== selectedCard._id;
+        });
+        setClothingItems(updateClothingItems);
+        handleCloseModal();
       })
       .catch((err) => {
         console.log(err);
       });
-    handleCloseModal();
   };
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -47,14 +50,12 @@ function App() {
 
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
-    console.log(card);
     setSelectedCard(card);
   };
   const onAddItem = (addItem) => {
     postCards(addItem)
-      .then((response) => {
-        console.log(addItem);
-        return setClothingItems([addItem, ...clothingItems]);
+      .then((res) => {
+        setClothingItems([res, ...clothingItems]);
       })
       .catch((err) => {
         console.log(err);
