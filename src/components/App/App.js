@@ -70,6 +70,7 @@ function App() {
     getForecastWeather()
       .then((data) => {
         const temperature = parseWeatherData(data);
+
         setTemp(temperature);
         setCity(temperature.location);
       })
