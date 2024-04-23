@@ -36,3 +36,12 @@
   margin: 0;
   padding: 0;
 }
+.profile__button {
+  border-style: none;
+  padding: 0 0 0 20px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
+  color: rgba(0, 0, 0, 0.6);
+}

@@ -1,13 +1,13 @@
 import "../Main/Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
-import { useMemo, useContext } from "react";
+import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function Main({ weatherTemp, onSelectCard, initialClothes }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
-  const weatherType = useMemo(() => {
+  const getWeatherType = () => {
     if (currentTemperatureUnit === "F" && temp >= 86) {
       return "hot";
     } else if (currentTemperatureUnit === "F" && temp >= 66 && temp <= 85) {
@@ -21,8 +21,8 @@ function Main({ weatherTemp, onSelectCard, initialClothes }) {
     } else if (currentTemperatureUnit === "C" && temp <= 19) {
       return "cold";
     }
-  }, [weatherTemp]);
-
+  };
+  const weatherType = getWeatherType();
   const filteredCards = initialClothes.filter((item) => {
     return item.weather.toLocaleLowerCase() === weatherType;
   });

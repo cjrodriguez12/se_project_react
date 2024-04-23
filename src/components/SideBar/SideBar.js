@@ -1,4 +1,4 @@
-import "./Profile.css";
+import "../Profile/Profile.css";
 import avatar from "../../images/avatar.svg";
 
 const SideBar = () => {

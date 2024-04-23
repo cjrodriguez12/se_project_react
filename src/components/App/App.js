@@ -11,6 +11,8 @@ import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.js";
 
+//json-server --watch db.json --id _id --port 3001
+
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -56,15 +58,14 @@ function App() {
     postCards(addItem)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
+        handleCloseModal();
       })
       .catch((err) => {
         console.log(err);
       });
-    handleCloseModal();
   };
   const handleToggleSwitchChange = () => {
-    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
-    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
   useEffect(() => {
     getForecastWeather()
@@ -97,6 +98,7 @@ function App() {
             <Profile
               initialClothes={clothingItems}
               onSelectCard={handleSelectedCard}
+              onCreateModal={handleCreateModal}
             />
           </Route>
         </Switch>

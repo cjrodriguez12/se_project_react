@@ -1,70 +1,43 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Objective
+The objective of this iteration is to continue implementing functionality using the React features that have been recently learned. Specifically, we aim to achieve the following tasks:
 
-## Available Scripts
+Implement a temperature unit toggle switch utilizing React context.
+Establish a profile page route employing React Router.
+Enable form submission utilizing controlled components or refs.
+Set up a mock server and develop code to make API calls to it. This mock server will replicate the behavior of the backend that will be constructed in Sprint 12.
+Implementation Details
 
-In the project directory, you can run:
+1. Temperature Unit Toggle Switch
+   In this task, we will create a toggle switch component that allows users to switch between different temperature units. We will utilize React context to manage the state globally within our application, ensuring consistent access to the chosen temperature unit across various components.
 
-### `npm start`
+2. Profile Page Route
+   To implement the profile page route, we will integrate React Router into our application. This will enable navigation to a dedicated profile page, providing users with a personalized experience. The profile page will showcase relevant user information and preferences.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Form Submission
+   For form submission functionality, we have the option to utilize controlled components or refs based on the specific requirements of our application. Controlled components offer a more declarative approach, while refs provide direct access to form elements. We will choose the method that best aligns with our project's needs.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. Mock Server and API Calls
+   To simulate backend interactions during development, we will set up a mock server. This server will emulate the behavior of the actual backend that will be developed in Sprint 12. By making API calls to the mock server, we can test and validate our application's frontend functionality without relying on the backend infrastructure.
 
-### `npm test`
+Getting Started
+To get started with this iteration, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the project repository from [repository link].
+Install the necessary dependencies by running npm install.
+Implement the specified tasks outlined above, ensuring adherence to best practices and project requirements.
+Test the implemented functionality thoroughly to identify and resolve any issues or bugs.
+Collaborate with team members to integrate changes seamlessly and maintain project consistency.
+Resources
+React Documentation - Refer to official React documentation for guidance on utilizing React features effectively.
+React Router Documentation - Explore React Router documentation for implementing navigation and routing within your React application.
+Mock Service Worker - Learn about Mock Service Worker for setting up a mock server to simulate backend interactions during development.
+Additional Notes
+Ensure that all implemented features are thoroughly tested to guarantee optimal performance and user experience.
+Collaborate closely with team members to ensure consistency in code style, architecture, and project progress.
+Regularly communicate progress, challenges, and insights to maintain transparency and facilitate effective teamwork.
+Feedback and Contributions
+Your feedback and contributions are highly valued. If you encounter any issues, have suggestions for improvement, or would like to contribute enhancements, please feel free to raise them via the project repository's issue tracker or submit pull requests.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Let's collaborate to create a robust and user-friendly application!
