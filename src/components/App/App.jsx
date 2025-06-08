@@ -1,15 +1,18 @@
 import "./App.css";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
+import Header from "../Header/Header.jsx";
+import Main from "../Main/Main.jsx";
 import { useEffect, useState } from "react";
-import ItemModal from "../ItemModal/ItemModal";
-import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
-import Footer from "../Footer/Footer";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import AddItemModal from "../AddItemModal/AddItemModal";
+import ItemModal from "../ItemModal/ItemModal.jsx";
+import {
+  getForecastWeather,
+  parseWeatherData,
+} from "../../utils/weatherApi.jsx";
+import Footer from "../Footer/Footer.jsx";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
-import Profile from "../Profile/Profile";
-import { getInitialCards, deleteCards, postCards } from "../../utils/api.js";
+import Profile from "../Profile/Profile.jsx";
+import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
 
 //json-server --watch db.json --id _id --port 3001
 
