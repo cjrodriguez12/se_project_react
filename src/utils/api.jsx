@@ -1,6 +1,6 @@
 import processServerResponse from "./serverResponse";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = "http://localhost:3000";
 const headers = { "Content-Type": "application/json" };
 //load cards from server
 export const getInitialCards = () => {

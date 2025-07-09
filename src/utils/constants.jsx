@@ -13,12 +13,12 @@ import stormNight from "../images/night/storm.svg";
 
 export const weatherOptions = [
   {
-    url: clearDay.default,
+    url: clearDay,
     day: true,
     type: "clear",
   },
   {
-    url: cloudyDay.default,
+    url: cloudyDay,
     day: true,
     type: "cloudy",
   },
@@ -27,28 +27,28 @@ export const weatherOptions = [
   { url: snowDay, day: true, type: "snow" },
   { url: stormDay, day: true, type: "storm" },
   {
-    url: clearNight.default,
+    url: clearNight,
     day: false,
     type: "clear",
   },
   {
-    url: cloudyNight.default,
+    url: cloudyNight,
     day: false,
     type: "cloudy",
   },
   { url: fogNight, day: false, type: "fog" },
   {
-    url: rainNight.default,
+    url: rainNight,
     day: false,
     type: "rain",
   },
   {
-    url: snowNight.default,
+    url: snowNight,
     day: false,
     type: "snow",
   },
   {
-    url: snowNight.default,
+    url: stormNight,
     day: false,
     type: "storm",
   },
