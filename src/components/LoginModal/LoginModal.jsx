@@ -36,7 +36,7 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
         <input
           className="modal_form-input"
           placeholder="Email"
-          type="text"
+          type="email"
           name="name"
           minLength="1"
           maxLength="30"
@@ -49,7 +49,7 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
         <input
           className="modal_form-input"
           placeholder="Password"
-          type="url"
+          type="password"
           name="link"
           minLength="1"
           maxLength="300"
