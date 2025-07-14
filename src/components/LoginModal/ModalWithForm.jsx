@@ -1,3 +1,4 @@
+import RegisterModal from "../RegisterModal/RegisterModal";
 import "./ModalWithForm.css";
 
 const ModalWithForm = ({
@@ -5,6 +6,7 @@ const ModalWithForm = ({
   title,
   onClose,
   onSubmit,
+  RegisterModal,
   name = "form",
 }) => {
   return (
@@ -18,6 +20,13 @@ const ModalWithForm = ({
           {children}
           <button className="modal_submit" type="submit">
             Log In
+          </button>
+          <button
+            className="modal_register-button"
+            type="button"
+            onClick={RegisterModal}
+          >
+            or Register
           </button>
         </form>
       </div>

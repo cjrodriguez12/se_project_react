@@ -3,12 +3,12 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
   const [email, setEmail] = useState("");
-  const handleNameChange = (e) => {
+  const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const [imageUrl, setUrl] = useState("");
-  const handleUrlChange = (e) => {
+  const [password, setPassword] = useState("");
+  const handlePassChange = (e) => {
     setUrl(e.target.value);
   };
 
@@ -37,11 +37,11 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
           className="modal_form-input"
           placeholder="Email"
           type="email"
-          name="name"
+          name="email"
           minLength="1"
           maxLength="30"
           value={email}
-          onChange={handleNameChange}
+          onChange={handleEmailChange}
         ></input>
       </label>
       <label className="modal_form-label">
@@ -50,11 +50,11 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
           className="modal_form-input"
           placeholder="Password"
           type="password"
-          name="link"
+          name="password"
           minLength="1"
           maxLength="300"
-          value={imageUrl}
-          onChange={handleUrlChange}
+          value={password}
+          onChange={handlePassChange}
         ></input>
       </label>
     </ModalWithForm>

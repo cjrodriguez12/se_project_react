@@ -17,7 +17,14 @@ const ModalWithForm = ({
         <form onSubmit={onSubmit} className="modal_form">
           {children}
           <button className="modal_submit" type="submit">
-            Add Garment
+            Next
+          </button>
+          <button
+            className="modal_login-button"
+            type="button"
+            onClick={onClose}
+          >
+            or Log In
           </button>
         </form>
       </div>

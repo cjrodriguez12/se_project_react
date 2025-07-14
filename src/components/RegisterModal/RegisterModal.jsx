@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ModalWithForm from "../RegisterModal/ModalWithForm";
 
-const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
+const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
   const [email, setEmail] = useState("");
-  const handleNameChange = (e) => {
+  const handleEmailChange = (e) => {
     setEmail(e.target.value);
+  };
+
+  const [password, setPassword] = useState("");
+  const handlePassChange = (e) => {
+    setUrl(e.target.value);
+  };
+  const [name, setName] = useState("");
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
   const [imageUrl, setUrl] = useState("");
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin({ email, password });
+    onLogin({ email, password, name, imageUrl });
   };
 
   useEffect(() => {
@@ -37,11 +45,11 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
           className="modal_form-input"
           placeholder="Email"
           type="email"
-          name="name"
+          name="email"
           minLength="1"
           maxLength="30"
           value={email}
-          onChange={handleNameChange}
+          onChange={handleEmailChange}
         ></input>
       </label>
       <label className="modal_form-label">
@@ -50,6 +58,32 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
           className="modal_form-input"
           placeholder="Password"
           type="password"
+          name="password"
+          minLength="1"
+          maxLength="300"
+          value={password}
+          onChange={handlePassChange}
+        ></input>
+      </label>
+      <label className="modal_form-label">
+        Name
+        <input
+          className="modal_form-input"
+          placeholder="Name"
+          type="text"
+          name="name"
+          minLength="1"
+          maxLength="30"
+          value={name}
+          onChange={handleNameChange}
+        ></input>
+      </label>
+      <label className="modal_form-label">
+        Avatar URL
+        <input
+          className="modal_form-input"
+          placeholder="Avatar URL"
+          type="url"
           name="link"
           minLength="1"
           maxLength="300"
@@ -60,3 +94,4 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
     </ModalWithForm>
   );
 };
+export default RegisterModal;
