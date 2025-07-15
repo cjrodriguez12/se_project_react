@@ -1,4 +1,3 @@
-import RegisterModal from "../RegisterModal/RegisterModal";
 import "./ModalWithForm.css";
 
 const ModalWithForm = ({

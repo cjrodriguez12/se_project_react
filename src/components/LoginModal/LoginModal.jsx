@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ModalWithForm from "../LoginModal/ModalWithForm";
 
 const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
 
   const [password, setPassword] = useState("");
   const handlePassChange = (e) => {
-    setUrl(e.target.value);
+    setPassword(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -60,3 +60,4 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen }) => {
     </ModalWithForm>
   );
 };
+export default LoginModal;
