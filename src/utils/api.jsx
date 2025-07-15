@@ -25,3 +25,27 @@ export const postCards = (itemCard) => {
     }),
   }).then(processServerResponse);
 };
+//Login user
+export const loginUser = (email, password) => {
+  return fetch(`${baseUrl}/login`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  }).then(processServerResponse);
+};
+//Register user
+export const registerUser = (email, password, name, avatar) => {
+  return fetch(`${baseUrl}/register`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      email,
+      password,
+      name,
+      avatar,
+    }),
+  }).then(processServerResponse);
+};
