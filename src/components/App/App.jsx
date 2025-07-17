@@ -13,7 +13,12 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
-
+import {
+  email,
+  password,
+  name,
+  imageUrl,
+} from "../RegisterModal/RegisterModal.jsx";
 //json-server --watch db.json --id _id --port 3001
 
 function App() {
@@ -23,6 +28,13 @@ function App() {
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    email,
+    password,
+    name,
+    imageUrl,
+  });
 
   useEffect(() => {
     getInitialCards()
@@ -35,6 +47,18 @@ function App() {
   }, []);
   const handleCloseModal = () => {
     setActiveModal("");
+  };
+  const handleCreateModal = () => {
+    setActiveModal("create");
+  };
+  const handleRegisterModal = () => {
+    setActiveModal("register");
+  };
+  const handleLoginModal = () => {
+    setActiveModal("login");
+  };
+  const handleLogin = (userData) => {
+    setCurrentUser(userData);
   };
   const handleDeleteCard = () => {
     deleteCards(selectedCard._id)
@@ -49,10 +73,6 @@ function App() {
         console.log(err);
       });
   };
-  const handleCreateModal = () => {
-    setActiveModal("create");
-  };
-
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);

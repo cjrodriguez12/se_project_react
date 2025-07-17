@@ -9,7 +9,7 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
 
   const [password, setPassword] = useState("");
   const handlePassChange = (e) => {
-    setUrl(e.target.value);
+    setPassword(e.target.value);
   };
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
@@ -34,7 +34,7 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
 
   return (
     <ModalWithForm
-      title="Log In"
+      title="Sign Up"
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}

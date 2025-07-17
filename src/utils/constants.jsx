@@ -10,7 +10,8 @@ import snowDay from "../images/day/snow.svg";
 import snowNight from "../images/night/snow.svg";
 import stormDay from "../images/day/storm.svg";
 import stormNight from "../images/night/storm.svg";
-
+export const baseUrl = "http://localhost:3000";
+export const headers = { "Content-Type": "application/json" };
 export const weatherOptions = [
   {
     url: clearDay,

@@ -1,7 +1,6 @@
 import processServerResponse from "./serverResponse";
-
-const baseUrl = "http://localhost:3000";
-const headers = { "Content-Type": "application/json" };
+import { baseUrl } from "../utils/constants";
+import headers from "../utils/constants";
 //load cards from server
 export const getInitialCards = () => {
   return fetch(`${baseUrl}/items`).then(processServerResponse);
@@ -22,30 +21,6 @@ export const postCards = (itemCard) => {
       name,
       imageUrl,
       weather,
-    }),
-  }).then(processServerResponse);
-};
-//Login user
-export const loginUser = (email, password) => {
-  return fetch(`${baseUrl}/login`, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  }).then(processServerResponse);
-};
-//Register user
-export const registerUser = (email, password, name, avatar) => {
-  return fetch(`${baseUrl}/register`, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify({
-      email,
-      password,
-      name,
-      avatar,
     }),
   }).then(processServerResponse);
 };
