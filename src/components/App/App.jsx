@@ -10,7 +10,11 @@ import {
 import Footer from "../Footer/Footer.jsx";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
 import {
@@ -58,6 +62,13 @@ function App() {
     setActiveModal("login");
   };
   const handleLogin = (userData) => {
+    if (!userData) {
+      setIsLoggedIn(false);
+      setCurrentUser({});
+      return;
+    } else {
+      setIsLoggedIn(true);
+    }
     setCurrentUser(userData);
   };
   const handleDeleteCard = () => {
@@ -110,18 +121,22 @@ function App() {
       >
         <Header exact onCreateModal={handleCreateModal} location={city} />
         <Switch>
+          {isLoggedIn ? (
+            <Route path="/profile">
+              <Profile
+                initialClothes={clothingItems}
+                onSelectCard={handleSelectedCard}
+                onCreateModal={handleCreateModal}
+              />
+            </Route>
+          ) : (
+            <Redirect from="/profile" to="/" />
+          )}
           <Route exact path="/">
             <Main
               initialClothes={clothingItems}
               weatherTemp={temp}
               onSelectCard={handleSelectedCard}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile
-              initialClothes={clothingItems}
-              onSelectCard={handleSelectedCard}
-              onCreateModal={handleCreateModal}
             />
           </Route>
         </Switch>
@@ -132,6 +147,19 @@ function App() {
             isOpen={activeModal === "create"}
             onAddItem={onAddItem}
           />
+        )}
+        {(activeModal === "login" || activeModal === "register") && (
+          <Redirect to="/" />
+        )}
+        {!isLoggedIn && (
+          <div className="login_register_buttons">
+            <button className="login_button" onClick={handleLoginModal}>
+              Log In
+            </button>
+            <button className="register_button" onClick={handleRegisterModal}>
+              Register
+            </button>
+          </div>
         )}
         <Footer />
         {activeModal === "preview" && (
