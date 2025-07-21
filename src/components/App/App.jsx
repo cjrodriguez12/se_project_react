@@ -17,7 +17,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
-import {
+import RegisterModal, {
   email,
   password,
   name,
@@ -71,6 +71,22 @@ function App() {
     }
     setCurrentUser(userData);
   };
+  const handleRegister = (userData) => {
+    if (!userData) {
+      setIsLoggedIn(false);
+      setCurrentUser({});
+      return;
+    } else {
+      setIsLoggedIn(true);
+    }
+    setCurrentUser(userData);
+  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      handleCloseModal();
+    }
+  }, [isLoggedIn]);
+
   const handleDeleteCard = () => {
     deleteCards(selectedCard._id)
       .then((res) => {
@@ -148,8 +164,19 @@ function App() {
             onAddItem={onAddItem}
           />
         )}
-        {(activeModal === "login" || activeModal === "register") && (
-          <Redirect to="/" />
+        {activeModal === "register" && (
+          <RegisterModal
+            handleCloseModal={handleCloseModal}
+            onLogin={handleRegister}
+            isOpen={activeModal === "register"}
+          />
+        )}
+        {activeModal === "login" && (
+          <LoginModal
+            handleCloseModal={handleCloseModal}
+            onLogin={handleLogin}
+            isOpen={activeModal === "login"}
+          />
         )}
         {!isLoggedIn && (
           <div className="login_register_buttons">
