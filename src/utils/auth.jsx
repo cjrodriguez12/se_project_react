@@ -1,9 +1,9 @@
-import { baseUrl } from "../utils/constants";
+import { baseUrl } from "./constants";
 import processServerResponse from "./serverResponse";
-import headers from "../utils/constants";
+import headers from "./constants";
 //Login user
 export const loginUser = (email, password) => {
-  return fetch(`${baseUrl}/login`, {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({
@@ -14,7 +14,7 @@ export const loginUser = (email, password) => {
 };
 //Register user
 export const registerUser = (email, password, name, avatar) => {
-  return fetch(`${baseUrl}/register`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({

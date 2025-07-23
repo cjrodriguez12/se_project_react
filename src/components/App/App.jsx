@@ -23,6 +23,7 @@ import RegisterModal, {
   name,
   imageUrl,
 } from "../RegisterModal/RegisterModal.jsx";
+import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 //json-server --watch db.json --id _id --port 3001
 
 function App() {
@@ -61,32 +62,55 @@ function App() {
   const handleLoginModal = () => {
     setActiveModal("login");
   };
+  const handleSignIn = (userData) => {
+    loginUser(userData.email, userData.password)
+      .then((data) => {
+        setCurrentUser(data);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        console.error(`Error: ${err.status}`);
+      });
+  };
   const handleLogin = (userData) => {
     if (!userData) {
       setIsLoggedIn(false);
       setCurrentUser({});
       return;
     } else {
+      getUserData(userData.token)
+        .then((data) => {
+          handleSignIn(data);
+        })
+        .catch((err) => {
+          console.error(`Error: ${err.status}`);
+        });
       setIsLoggedIn(true);
     }
     setCurrentUser(userData);
   };
   const handleRegister = (userData) => {
-    if (!userData) {
-      setIsLoggedIn(false);
-      setCurrentUser({});
-      return;
-    } else {
-      setIsLoggedIn(true);
-    }
-    setCurrentUser(userData);
+    registerUser(
+      userData.email,
+      userData.password,
+      userData.name,
+      userData.imageUrl
+    )
+      .then((data) => {
+        handleSignIn(data);
+      })
+      .catch((err) => {
+        console.error(`Error: ${err.status}`);
+      });
+
+    handleCloseModal();
   };
+
   useEffect(() => {
     if (isLoggedIn) {
       handleCloseModal();
     }
   }, [isLoggedIn]);
-
   const handleDeleteCard = () => {
     deleteCards(selectedCard._id)
       .then((res) => {
