@@ -101,11 +101,10 @@ function App() {
       })
       .catch((err) => {
         console.error(`Error: ${err.status}`);
+        setIsLoggedIn(false);
+        setCurrentUser({});
       });
-
-    handleCloseModal();
   };
-
   useEffect(() => {
     if (isLoggedIn) {
       handleCloseModal();
