@@ -24,6 +24,7 @@ import RegisterModal, {
   imageUrl,
 } from "../RegisterModal/RegisterModal.jsx";
 import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
+import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
     name,
     imageUrl,
   });
-
+  //close modal when user logs in
   useEffect(() => {
     getInitialCards()
       .then((data) => {
@@ -50,6 +51,7 @@ function App() {
         console.error(err);
       });
   }, []);
+
   const handleCloseModal = () => {
     setActiveModal("");
   };
@@ -62,33 +64,22 @@ function App() {
   const handleLoginModal = () => {
     setActiveModal("login");
   };
-  const handleSignIn = (userData) => {
-    loginUser(userData.email, userData.password)
-      .then((data) => {
-        setCurrentUser(data);
-        setIsLoggedIn(true);
-      })
-      .catch((err) => {
-        console.error(`Error: ${err.status}`);
-      });
-  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      handleCloseModal();
+    }
+  }, [isLoggedIn]);
+  // Function to handle user login
   const handleLogin = (userData) => {
     if (!userData) {
       setIsLoggedIn(false);
       setCurrentUser({});
       return;
     } else {
-      getUserData(userData.token)
-        .then((data) => {
-          handleSignIn(data);
-        })
-        .catch((err) => {
-          console.error(`Error: ${err.status}`);
-        });
-      setIsLoggedIn(true);
+      handleSignIn(userData);
     }
-    setCurrentUser(userData);
   };
+  // Function to handle user registration and login
   const handleRegister = (userData) => {
     registerUser(
       userData.email,
@@ -105,11 +96,43 @@ function App() {
         setCurrentUser({});
       });
   };
-  useEffect(() => {
-    if (isLoggedIn) {
-      handleCloseModal();
-    }
-  }, [isLoggedIn]);
+
+  // Function to handle user sign-in
+  // This function logs in the user and updates the current user context
+  const handleSignIn = (userData) => {
+    loginUser(userData.email, userData.password)
+      .then((res) => {
+        if (res.token) {
+          userData.token = res.token;
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+        localStorage.setItem("jwt", res.token);
+        setCurrentUser(userData);
+        return res;
+      })
+      .then((res) => {
+        getUserData(res.token)
+          .then((res) => {
+            setCurrentUser((prevUser) => ({
+              ...prevUser,
+              email: res.email,
+              password: res.password,
+              name: res.name,
+              avatar: res.avatar,
+            }));
+
+            return res;
+          })
+          .catch((err) => {
+            setIsLoggedIn(false);
+            setCurrentUser({});
+            console.error(`Error: ${err.status}`);
+          });
+      });
+  };
+
   const handleDeleteCard = () => {
     deleteCards(selectedCard._id)
       .then((res) => {
@@ -155,71 +178,80 @@ function App() {
 
   return (
     <div className="App">
-      <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      <CurrentUserContext.Provider
+        value={{ currentUser, isLoggedIn, handleLogin }}
       >
-        <Header exact onCreateModal={handleCreateModal} location={city} />
-        <Switch>
-          {isLoggedIn ? (
-            <Route path="/profile">
-              <Profile
-                initialClothes={clothingItems}
-                onSelectCard={handleSelectedCard}
-                onCreateModal={handleCreateModal}
-              />
-            </Route>
-          ) : (
-            <Redirect from="/profile" to="/" />
-          )}
-          <Route exact path="/">
-            <Main
-              initialClothes={clothingItems}
-              weatherTemp={temp}
-              onSelectCard={handleSelectedCard}
-            />
-          </Route>
-        </Switch>
+        <div classname="page">
+          <CurrentTemperatureUnitContext.Provider
+            value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+          >
+            <Header exact onCreateModal={handleCreateModal} location={city} />
+            <Switch>
+              {isLoggedIn ? (
+                <Route path="/profile">
+                  <Profile
+                    initialClothes={clothingItems}
+                    onSelectCard={handleSelectedCard}
+                    onCreateModal={handleCreateModal}
+                  />
+                </Route>
+              ) : (
+                <Redirect from="/profile" to="/" />
+              )}
+              <Route exact path="/">
+                <Main
+                  initialClothes={clothingItems}
+                  weatherTemp={temp}
+                  onSelectCard={handleSelectedCard}
+                />
+              </Route>
+            </Switch>
 
-        {activeModal === "create" && (
-          <AddItemModal
-            handleCloseModal={handleCloseModal}
-            isOpen={activeModal === "create"}
-            onAddItem={onAddItem}
-          />
-        )}
-        {activeModal === "register" && (
-          <RegisterModal
-            handleCloseModal={handleCloseModal}
-            onLogin={handleRegister}
-            isOpen={activeModal === "register"}
-          />
-        )}
-        {activeModal === "login" && (
-          <LoginModal
-            handleCloseModal={handleCloseModal}
-            onLogin={handleLogin}
-            isOpen={activeModal === "login"}
-          />
-        )}
-        {!isLoggedIn && (
-          <div className="login_register_buttons">
-            <button className="login_button" onClick={handleLoginModal}>
-              Log In
-            </button>
-            <button className="register_button" onClick={handleRegisterModal}>
-              Register
-            </button>
-          </div>
-        )}
-        <Footer />
-        {activeModal === "preview" && (
-          <ItemModal
-            selectedCard={selectedCard}
-            onClose={handleCloseModal}
-            deleteCard={handleDeleteCard}
-          />
-        )}
-      </CurrentTemperatureUnitContext.Provider>
+            {activeModal === "create" && (
+              <AddItemModal
+                handleCloseModal={handleCloseModal}
+                isOpen={activeModal === "create"}
+                onAddItem={onAddItem}
+              />
+            )}
+            {activeModal === "register" && (
+              <RegisterModal
+                handleCloseModal={handleCloseModal}
+                onLogin={handleRegister}
+                isOpen={activeModal === "register"}
+              />
+            )}
+            {activeModal === "login" && (
+              <LoginModal
+                handleCloseModal={handleCloseModal}
+                onLogin={handleLogin}
+                isOpen={activeModal === "login"}
+              />
+            )}
+            {!isLoggedIn && (
+              <div className="login_register_buttons">
+                <button className="login_button" onClick={handleLoginModal}>
+                  Log In
+                </button>
+                <button
+                  className="register_button"
+                  onClick={handleRegisterModal}
+                >
+                  Register
+                </button>
+              </div>
+            )}
+            <Footer />
+            {activeModal === "preview" && (
+              <ItemModal
+                selectedCard={selectedCard}
+                onClose={handleCloseModal}
+                deleteCard={handleDeleteCard}
+              />
+            )}
+          </CurrentTemperatureUnitContext.Provider>
+        </div>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
