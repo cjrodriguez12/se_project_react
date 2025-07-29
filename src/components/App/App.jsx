@@ -17,16 +17,11 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
-import RegisterModal, {
-  email,
-  password,
-  name,
-  imageUrl,
-} from "../RegisterModal/RegisterModal.jsx";
+import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
-
+import LoginModal from "../LoginModal/LoginModal.jsx";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -36,10 +31,10 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
-    email,
-    password,
-    name,
-    imageUrl,
+    email: "",
+    password: "",
+    name: "",
+    avatar: "",
   });
   //close modal when user logs in
   useEffect(() => {
@@ -175,29 +170,48 @@ function App() {
         console.error(`Error: ${error.status}`);
       });
   }, []);
-
+  const ProtectedRoute = ({ isLoggedIn, currentUser, children }) => {
+    return (
+      <Route
+        render={({ location }) =>
+          isLoggedIn ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/",
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
   return (
     <div className="App">
       <CurrentUserContext.Provider
         value={{ currentUser, isLoggedIn, handleLogin }}
       >
-        <div classname="page">
+        <div className="page">
           <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, handleToggleSwitchChange }}
           >
             <Header exact onCreateModal={handleCreateModal} location={city} />
             <Switch>
-              {isLoggedIn ? (
-                <Route path="/profile">
-                  <Profile
-                    initialClothes={clothingItems}
-                    onSelectCard={handleSelectedCard}
-                    onCreateModal={handleCreateModal}
-                  />
-                </Route>
-              ) : (
-                <Redirect from="/profile" to="/" />
-              )}
+              <ProtectedRoute
+                path="/profile"
+                isLoggedIn={isLoggedIn}
+                currentUser={currentUser}
+              >
+                <Profile
+                  currentUser={currentUser}
+                  clothingItems={clothingItems}
+                  onSelectCard={handleSelectedCard}
+                />
+                <children />
+              </ProtectedRoute>
+
               <Route exact path="/">
                 <Main
                   initialClothes={clothingItems}

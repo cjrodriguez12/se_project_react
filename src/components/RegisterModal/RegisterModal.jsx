@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import ModalWithForm from "../RegisterModal/ModalWithForm";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
   const [password, setPassword] = useState("");
   const handlePassChange = (e) => {
     setPassword(e.target.value);
@@ -15,7 +14,6 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-
   const [imageUrl, setUrl] = useState("");
   const handleUrlChange = (e) => {
     setUrl(e.target.value);

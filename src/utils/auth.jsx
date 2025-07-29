@@ -1,6 +1,6 @@
 import { baseUrl } from "./constants";
 import processServerResponse from "./serverResponse";
-import headers from "./constants";
+import { headers } from "./constants";
 //Login user
 export const loginUser = (email, password) => {
   return fetch(`${baseUrl}/signin`, {

@@ -1,6 +1,6 @@
 import processServerResponse from "./serverResponse";
 import { baseUrl } from "../utils/constants";
-import headers from "../utils/constants";
+import { headers } from "../utils/constants";
 //load cards from server
 export const getInitialCards = () => {
   return fetch(`${baseUrl}/items`).then(processServerResponse);
