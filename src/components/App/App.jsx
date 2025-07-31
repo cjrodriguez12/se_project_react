@@ -17,7 +17,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
-import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import RegisterModal from "../SignupModal/SignupModal.jsx";
 import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
@@ -148,7 +148,7 @@ function App() {
   const onAddItem = (addItem) => {
     postCards(addItem)
       .then((res) => {
-        setClothingItems([res, ...clothingItems]);
+        setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
       })
       .catch((err) => {

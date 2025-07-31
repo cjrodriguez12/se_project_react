@@ -1,6 +1,6 @@
-import "./ModalWithForm.css";
+import "./SignupModal.css";
 
-const ModalWithForm = ({
+const SignupModalWithForm = ({
   children,
   title,
   onClose,
@@ -17,7 +17,7 @@ const ModalWithForm = ({
         <form onSubmit={onSubmit} className="modal_form">
           {children}
           <button className="modal_submit" type="submit">
-            Next
+            Sign Up
           </button>
           <button
             className="modal_login-button"
@@ -31,4 +31,4 @@ const ModalWithForm = ({
     </div>
   );
 };
-export default ModalWithForm;
+export default SignupModalWithForm;
