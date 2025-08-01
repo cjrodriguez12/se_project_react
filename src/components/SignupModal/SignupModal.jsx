@@ -6,6 +6,7 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
+
   const [password, setPassword] = useState("");
   const handlePassChange = (e) => {
     setPassword(e.target.value);
@@ -29,6 +30,11 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
       setPassword("");
     }
   }, [isOpen]);
+  const handleModelChange = () => {
+    handleCloseModal();
+    const [activeModal, setActiveModal] = useState("");
+    setActiveModal("login");
+  };
 
   return (
     <SignupModalWithForm
@@ -36,6 +42,7 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      onClick={handleModelChange}
     >
       <label className="modal_form-label">
         Email

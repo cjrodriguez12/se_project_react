@@ -5,7 +5,7 @@ const LoginModalWithForm = ({
   title,
   onClose,
   onSubmit,
-  SignupModalWithForm,
+  RegisterModal,
   name = "form",
 }) => {
   return (
@@ -17,16 +17,18 @@ const LoginModalWithForm = ({
         </div>
         <form onSubmit={onSubmit} className="modal_form">
           {children}
-          <button className="modal_submit" type="submit">
-            Log In
-          </button>
-          <button
-            className="modal_register-button"
-            type="button"
-            onClick={SignupModalWithForm}
-          >
-            or Register
-          </button>
+          <div className="modal_buttons">
+            <button className="modal_submit" type="submit">
+              Log In
+            </button>
+            <button
+              className="modal_register-button"
+              type="button"
+              onClick={RegisterModal}
+            >
+              or Sign Up
+            </button>
+          </div>
         </form>
       </div>
     </div>

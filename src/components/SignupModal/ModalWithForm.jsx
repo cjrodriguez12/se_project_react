@@ -3,8 +3,9 @@ import "./SignupModal.css";
 const SignupModalWithForm = ({
   children,
   title,
-  onClose,
+  handleModelChange,
   onSubmit,
+  onClose,
   name = "form",
 }) => {
   return (
@@ -16,16 +17,18 @@ const SignupModalWithForm = ({
         </div>
         <form onSubmit={onSubmit} className="modal_form">
           {children}
-          <button className="modal_submit" type="submit">
-            Sign Up
-          </button>
-          <button
-            className="modal_login-button"
-            type="button"
-            onClick={onClose}
-          >
-            or Log In
-          </button>
+          <div className="modal_buttons">
+            <button className="modal_submit" type="submit">
+              Sign Up
+            </button>
+            <button
+              className="modal_login-button"
+              type="button"
+              onClick={handleModelChange}
+            >
+              or Log In
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -61,6 +61,7 @@
   border-radius: 2px;
   color: white;
   border-style: none;
+  font-family: inherit;
 }
 .modal_radio {
   padding-bottom: 32px;
@@ -70,4 +71,18 @@
 }
 .modal_radio-input {
   padding-bottom: 8px;
+}
+.modal_login-button {
+  width: 124px;
+  height: 36px;
+  background-color: transparent;
+  border-radius: 2px;
+  color: rgba(0, 0, 0, 0.5);
+  border-style: none;
+  font-family: inherit;
+}
+.modal_buttons {
+  display: flex;
+  width: 100%;
+  margin-top: 24px;
 }
