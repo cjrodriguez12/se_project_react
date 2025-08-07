@@ -3,7 +3,6 @@ import "./SignupModal.css";
 const SignupModalWithForm = ({
   children,
   title,
-  handleModelChange,
   onSubmit,
   onClose,
   name = "form",

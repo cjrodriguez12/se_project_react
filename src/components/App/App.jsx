@@ -14,6 +14,7 @@ import {
   Redirect,
   Route,
   Switch,
+  useNavigate,
 } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
@@ -64,6 +65,7 @@ function App() {
       handleCloseModal();
     }
   }, [isLoggedIn]);
+
   // Function to handle user login
   const handleLogin = (userData) => {
     if (!userData) {
@@ -72,6 +74,8 @@ function App() {
       return;
     } else {
       handleSignIn(userData);
+      const navigate = useNavigate();
+      navigate("/profile", { replace: true });
     }
   };
   // Function to handle user registration and login
@@ -100,6 +104,7 @@ function App() {
         if (res.token) {
           userData.token = res.token;
           setIsLoggedIn(true);
+          handleCloseModal();
         } else {
           setIsLoggedIn(false);
         }
@@ -126,6 +131,7 @@ function App() {
             console.error(`Error: ${err.status}`);
           });
       });
+    return res;
   };
 
   const handleDeleteCard = () => {

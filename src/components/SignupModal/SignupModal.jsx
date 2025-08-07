@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import SignupModalWithForm from "../SignupModal/ModalWithForm";
 
-const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
+const RegisterModal = ({
+  handleCloseModal,
+  handleLoginModal,
+  onLogin,
+  isOpen,
+}) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -30,11 +35,6 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
       setPassword("");
     }
   }, [isOpen]);
-  const handleModelChange = () => {
-    handleCloseModal();
-    const [activeModal, setActiveModal] = useState("");
-    setActiveModal("login");
-  };
 
   return (
     <SignupModalWithForm
@@ -42,7 +42,7 @@ const RegisterModal = ({ handleCloseModal, onLogin, isOpen }) => {
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      onClick={handleModelChange}
+      onClick={handleLoginModal}
     >
       <label className="modal_form-label">
         Email
