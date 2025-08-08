@@ -65,18 +65,21 @@ function App() {
       handleCloseModal();
     }
   }, [isLoggedIn]);
-
+  const navigate = useNavigate();
   // Function to handle user login
   const handleLogin = (userData) => {
-    if (!userData) {
-      setIsLoggedIn(false);
-      setCurrentUser({});
-      return;
-    } else {
-      handleSignIn(userData);
-      const navigate = useNavigate();
-      navigate("/profile", { replace: true });
-    }
+    handleSignIn(userData)
+      .then((res) => {
+        if (res && res.token) {
+          navigate("/profile", { replace: true });
+          return res;
+        }
+      })
+      .catch((err) => {
+        console.error(`Error: ${err.status}`);
+        setIsLoggedIn(false);
+        setCurrentUser({});
+      });
   };
   // Function to handle user registration and login
   const handleRegister = (userData) => {
@@ -86,8 +89,9 @@ function App() {
       userData.name,
       userData.imageUrl
     )
-      .then((data) => {
-        handleSignIn(data);
+      .then((userData) => {
+        handleSignIn(userData);
+        return userData;
       })
       .catch((err) => {
         console.error(`Error: ${err.status}`);
@@ -95,7 +99,6 @@ function App() {
         setCurrentUser({});
       });
   };
-
   // Function to handle user sign-in
   // This function logs in the user and updates the current user context
   const handleSignIn = (userData) => {
@@ -122,7 +125,6 @@ function App() {
               name: res.name,
               avatar: res.avatar,
             }));
-
             return res;
           })
           .catch((err) => {
@@ -131,7 +133,6 @@ function App() {
             console.error(`Error: ${err.status}`);
           });
       });
-    return res;
   };
 
   const handleDeleteCard = () => {
