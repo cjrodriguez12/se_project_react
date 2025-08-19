@@ -13,7 +13,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import {
   Redirect,
   Route,
-  Switch,
+  Routes,
   useNavigate,
 } from "react-router-dom/cjs/react-router-dom.min";
 import Profile from "../Profile/Profile.jsx";
@@ -37,7 +37,7 @@ function App() {
     name: "",
     avatar: "",
   });
-  //close modal when user logs in
+
   useEffect(() => {
     getInitialCards()
       .then((data) => {
@@ -47,7 +47,7 @@ function App() {
         console.error(err);
       });
   }, []);
-
+  //close modal when user logs in
   const handleCloseModal = () => {
     setActiveModal("");
   };
@@ -65,9 +65,9 @@ function App() {
       handleCloseModal();
     }
   }, [isLoggedIn]);
-  const navigate = useNavigate();
   // Function to handle user login
   const handleLogin = (userData) => {
+    const navigate = useNavigate();
     handleSignIn(userData)
       .then((res) => {
         if (res && res.token) {
@@ -202,10 +202,10 @@ function App() {
       >
         <div className="page">
           <CurrentTemperatureUnitContext.Provider
-            value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+            value={{ currentTemperatureUnit, handleToggleRoutesChange }}
           >
             <Header exact onCreateModal={handleCreateModal} location={city} />
-            <Switch>
+            <Routes>
               <ProtectedRoute
                 path="/profile"
                 isLoggedIn={isLoggedIn}
@@ -226,7 +226,7 @@ function App() {
                   onSelectCard={handleSelectedCard}
                 />
               </Route>
-            </Switch>
+            </Routes>
 
             {activeModal === "create" && (
               <AddItemModal
