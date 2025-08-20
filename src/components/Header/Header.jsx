@@ -2,7 +2,7 @@ import "./Header.css";
 import logo from "../../images/Logo.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { Link, NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, NavLink } from "react-router-dom";
 const Header = ({ onCreateModal, location }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",

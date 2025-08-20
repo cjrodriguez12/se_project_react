@@ -10,12 +10,7 @@ import {
 import Footer from "../Footer/Footer.jsx";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import {
-  Redirect,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, Route, Routes, useNavigate } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
 import RegisterModal from "../SignupModal/SignupModal.jsx";
@@ -37,7 +32,8 @@ function App() {
     name: "",
     avatar: "",
   });
-
+  const navigate = useNavigate();
+  // Fetch initial clothing items from the server
   useEffect(() => {
     getInitialCards()
       .then((data) => {
@@ -65,9 +61,9 @@ function App() {
       handleCloseModal();
     }
   }, [isLoggedIn]);
+
   // Function to handle user login
   const handleLogin = (userData) => {
-    const navigate = useNavigate();
     handleSignIn(userData)
       .then((res) => {
         if (res && res.token) {
@@ -202,7 +198,7 @@ function App() {
       >
         <div className="page">
           <CurrentTemperatureUnitContext.Provider
-            value={{ currentTemperatureUnit, handleToggleRoutesChange }}
+            value={{ currentTemperatureUnit, handleToggleSwitchChange }}
           >
             <Header exact onCreateModal={handleCreateModal} location={city} />
             <Routes>
@@ -216,7 +212,6 @@ function App() {
                   clothingItems={clothingItems}
                   onSelectCard={handleSelectedCard}
                 />
-                <children />
               </ProtectedRoute>
 
               <Route exact path="/">
