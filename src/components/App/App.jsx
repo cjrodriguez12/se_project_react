@@ -10,7 +10,7 @@ import {
 import Footer from "../Footer/Footer.jsx";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import { Redirect, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
 import RegisterModal from "../SignupModal/SignupModal.jsx";
@@ -173,23 +173,11 @@ function App() {
         console.error(`Error: ${error.status}`);
       });
   }, []);
-  const ProtectedRoute = ({ isLoggedIn, currentUser, children }) => {
-    return (
-      <Route
-        render={({ location }) =>
-          isLoggedIn ? (
-            children
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/",
-                state: { from: location },
-              }}
-            />
-          )
-        }
-      />
-    );
+  const ProtectedRoute = ({ Profile }) => {
+    return isLoggedIn ? <Profile /> : navigate("/", { replace: true });
+  };
+  const MainRoute = ({ Main }) => {
+    return !isLoggedIn ? <Main /> : navigate("/profile", { replace: true });
   };
   return (
     <div className="App">
@@ -202,25 +190,22 @@ function App() {
           >
             <Header exact onCreateModal={handleCreateModal} location={city} />
             <Routes>
-              <ProtectedRoute
+              <Route
                 path="/profile"
-                isLoggedIn={isLoggedIn}
+                element={<ProtectedRoute Profile={Profile} />}
                 currentUser={currentUser}
-              >
-                <Profile
-                  currentUser={currentUser}
-                  clothingItems={clothingItems}
-                  onSelectCard={handleSelectedCard}
-                />
-              </ProtectedRoute>
+                clothingItems={clothingItems}
+                onSelectCard={handleSelectedCard}
+              ></Route>
 
-              <Route exact path="/">
-                <Main
-                  initialClothes={clothingItems}
-                  weatherTemp={temp}
-                  onSelectCard={handleSelectedCard}
-                />
-              </Route>
+              <Route
+                exact
+                path="/"
+                element={<MainRoute Main={Main} />}
+                initialClothes={clothingItems}
+                weatherTemp={temp}
+                onSelectCard={handleSelectedCard}
+              ></Route>
             </Routes>
 
             {activeModal === "create" && (
