@@ -13,6 +13,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
+
 import RegisterModal from "../SignupModal/SignupModal.jsx";
 import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
@@ -174,10 +175,16 @@ function App() {
       });
   }, []);
   const ProtectedRoute = ({ Profile }) => {
-    return isLoggedIn ? <Profile /> : navigate("/", { replace: true });
+    return (
+      <Profile
+        currentUser={currentUser}
+        clothingItems={clothingItems}
+        onSelectCard={handleSelectedCard}
+      />
+    );
   };
   const MainRoute = ({ Main }) => {
-    return !isLoggedIn ? <Main /> : navigate("/profile", { replace: true });
+    return <Main weatherTemp={temp} initialClothes={clothingItems} />;
   };
   return (
     <div className="App">
@@ -193,17 +200,12 @@ function App() {
               <Route
                 path="/profile"
                 element={<ProtectedRoute Profile={Profile} />}
-                currentUser={currentUser}
-                clothingItems={clothingItems}
-                onSelectCard={handleSelectedCard}
               ></Route>
 
               <Route
                 exact
                 path="/"
                 element={<MainRoute Main={Main} />}
-                initialClothes={clothingItems}
-                weatherTemp={temp}
                 onSelectCard={handleSelectedCard}
               ></Route>
             </Routes>
