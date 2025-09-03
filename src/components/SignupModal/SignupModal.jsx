@@ -42,7 +42,7 @@ const RegisterModal = ({
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      onClick={handleLoginModal}
+      handleModalChange={handleLoginModal}
     >
       <label className="modal_form-label">
         Email
