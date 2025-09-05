@@ -3,7 +3,15 @@ import logo from "../../images/Logo.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link, NavLink } from "react-router-dom";
-const Header = ({ onCreateModal, location }) => {
+import { useState } from "react";
+import RegisterModal from "../SignupModal/SignupModal.jsx";
+import LoginModal from "../LoginModal/LoginModal.jsx";
+const Header = ({
+  onCreateModal,
+  location,
+  handleLoginModal,
+  handleRegisterModal,
+}) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -29,7 +37,14 @@ const Header = ({ onCreateModal, location }) => {
         <NavLink to="/profile" className="header__avatar-name">
           Charlie Rodriguez
         </NavLink>
-
+        <div className="login_register_buttons">
+          <button className="login_button" onClick={handleLoginModal}>
+            Log In
+          </button>
+          <button className="register_button" onClick={handleRegisterModal}>
+            Register
+          </button>
+        </div>
         <img className="header__avatar-img" src={avatar} alt="avatar" />
       </div>
     </header>

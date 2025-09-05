@@ -195,18 +195,35 @@ function App() {
           <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, handleToggleSwitchChange }}
           >
-            <Header exact onCreateModal={handleCreateModal} location={city} />
+            {isLoggedIn && (
+              <Header onCreateModal={handleCreateModal} location={city} />
+            )}
+            {!isLoggedIn && (
+              // <div className="login_register_buttons">
+              //   <button className="login_button" onClick={handleLoginModal}>
+              //     Log In
+              //   </button>
+              //   <button
+              //     className="register_button"
+              //     onClick={handleRegisterModal}
+              //   >
+              //     Register
+              //   </button>
+              // </div>
+              // )}
+              <Header onCreateModal={handleCreateModal} location={city} />
+            )}
             <Routes>
-              <Route
-                path="/profile"
-                element={<ProtectedRoute Profile={Profile} />}
-              ></Route>
-
               <Route
                 exact
                 path="/"
                 element={<MainRoute Main={Main} />}
                 onSelectCard={handleSelectedCard}
+              ></Route>
+
+              <Route
+                path="/profile"
+                element={<ProtectedRoute Profile={Profile} />}
               ></Route>
             </Routes>
 
@@ -231,19 +248,7 @@ function App() {
                 isOpen={activeModal === "login"}
               />
             )}
-            {!isLoggedIn && (
-              <div className="login_register_buttons">
-                <button className="login_button" onClick={handleLoginModal}>
-                  Log In
-                </button>
-                <button
-                  className="register_button"
-                  onClick={handleRegisterModal}
-                >
-                  Register
-                </button>
-              </div>
-            )}
+
             <Footer />
             {activeModal === "preview" && (
               <ItemModal
