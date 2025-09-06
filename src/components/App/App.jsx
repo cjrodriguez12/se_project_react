@@ -198,21 +198,12 @@ function App() {
             {isLoggedIn && (
               <Header onCreateModal={handleCreateModal} location={city} />
             )}
-            {!isLoggedIn && (
-              // <div className="login_register_buttons">
-              //   <button className="login_button" onClick={handleLoginModal}>
-              //     Log In
-              //   </button>
-              //   <button
-              //     className="register_button"
-              //     onClick={handleRegisterModal}
-              //   >
-              //     Register
-              //   </button>
-              // </div>
-              // )}
-              <Header onCreateModal={handleCreateModal} location={city} />
-            )}
+            <Header
+              onCreateModal={handleCreateModal}
+              location={city}
+              isLoggedIn={isLoggedIn}
+            />
+
             <Routes>
               <Route
                 exact

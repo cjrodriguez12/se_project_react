@@ -4,13 +4,13 @@ import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
-import RegisterModal from "../SignupModal/SignupModal.jsx";
-import LoginModal from "../LoginModal/LoginModal.jsx";
+
 const Header = ({
   onCreateModal,
   location,
   handleLoginModal,
   handleRegisterModal,
+  isLoggedIn,
 }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -22,7 +22,6 @@ const Header = ({
         <Link className="header__link" to="/">
           <img src={logo} alt="logo" />
         </Link>
-
         <div className="header__date">
           {currentDate}, {location}
         </div>
@@ -30,22 +29,34 @@ const Header = ({
       <div className="header__avatar-logo">
         <ToggleSwitch />
 
-        <button className="header__button" type="text" onClick={onCreateModal}>
-          + Add Clothes
-        </button>
+        {isLoggedIn && (
+          <button
+            className="header__button"
+            type="text"
+            onClick={onCreateModal}
+          >
+            + Add Clothes
+          </button>
+        )}
 
-        <NavLink to="/profile" className="header__avatar-name">
-          Charlie Rodriguez
-        </NavLink>
-        <div className="login_register_buttons">
-          <button className="login_button" onClick={handleLoginModal}>
-            Log In
-          </button>
-          <button className="register_button" onClick={handleRegisterModal}>
-            Register
-          </button>
-        </div>
-        <img className="header__avatar-img" src={avatar} alt="avatar" />
+        {isLoggedIn && (
+          <NavLink to="/profile" className="header__avatar-name">
+            Charlie Rodriguez
+          </NavLink>
+        )}
+        {!isLoggedIn && (
+          <div className="login_register_buttons">
+            <button className="login_button" onClick={handleLoginModal}>
+              Log In
+            </button>
+            <button className="register_button" onClick={handleRegisterModal}>
+              Register
+            </button>
+          </div>
+        )}
+        {isLoggedIn && (
+          <img className="header__avatar-img" src={avatar} alt="avatar" />
+        )}
       </div>
     </header>
   );
