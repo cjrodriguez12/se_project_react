@@ -41,3 +41,30 @@
   text-decoration: none;
   color: black;
 }
+.login_button {
+  border-style: none;
+  font-style: bold;
+  padding: 0 0 0 10px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  background-color: transparent;
+}
+.register_button {
+  border-style: none;
+  padding: 0 0 0 10px;
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  background-color: transparent;
+  border-radius: 4px;
+  font-style: bold;
+}
+.register_button:hover {
+  cursor: pointer;
+}
+.login_button:hover {
+  cursor: pointer;
+}
