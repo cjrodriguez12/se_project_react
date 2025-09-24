@@ -196,10 +196,17 @@ function App() {
             value={{ currentTemperatureUnit, handleToggleSwitchChange }}
           >
             {isLoggedIn && (
-              <Header onCreateModal={handleCreateModal} location={city} />
+              <Header
+                onCreateModal={handleCreateModal}
+                onLoginModal={handleLoginModal}
+                onRegisterModal={handleRegisterModal}
+                location={city}
+              />
             )}
             <Header
               onCreateModal={handleCreateModal}
+              onLoginModal={handleLoginModal}
+              onRegisterModal={handleRegisterModal}
               location={city}
               isLoggedIn={isLoggedIn}
             />
@@ -230,6 +237,7 @@ function App() {
                 handleCloseModal={handleCloseModal}
                 onLogin={handleRegister}
                 isOpen={activeModal === "register"}
+                onLoginModal={handleLoginModal}
               />
             )}
             {activeModal === "login" && (
@@ -237,6 +245,7 @@ function App() {
                 handleCloseModal={handleCloseModal}
                 onLogin={handleLogin}
                 isOpen={activeModal === "login"}
+                onRegisterModal={handleRegisterModal}
               />
             )}
 

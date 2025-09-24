@@ -5,7 +5,7 @@ const LoginModalWithForm = ({
   title,
   onClose,
   onSubmit,
-  RegisterModal,
+  onRegisterModal,
   name = "form",
 }) => {
   return (
@@ -24,7 +24,7 @@ const LoginModalWithForm = ({
             <button
               className="modal_register-button"
               type="button"
-              onClick={RegisterModal}
+              onClick={onRegisterModal}
             >
               or Sign Up
             </button>

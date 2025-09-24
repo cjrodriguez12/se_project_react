@@ -8,8 +8,8 @@ import { useState } from "react";
 const Header = ({
   onCreateModal,
   location,
-  handleLoginModal,
-  handleRegisterModal,
+  onLoginModal,
+  onRegisterModal,
   isLoggedIn,
 }) => {
   const currentDate = new Date().toLocaleString("default", {
@@ -46,10 +46,10 @@ const Header = ({
         )}
         {!isLoggedIn && (
           <div className="login_register_buttons">
-            <button className="login_button" onClick={handleLoginModal}>
+            <button className="login_button" onClick={onLoginModal}>
               Log In
             </button>
-            <button className="register_button" onClick={handleRegisterModal}>
+            <button className="register_button" onClick={onRegisterModal}>
               Register
             </button>
           </div>
