@@ -30,7 +30,7 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen, onRegisterModal }) => {
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      onClick={onRegisterModal}
+      onRegisterModal={onRegisterModal}
     >
       <label className="modal_form-label">
         Email

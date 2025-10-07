@@ -5,7 +5,7 @@ const SignupModalWithForm = ({
   title,
   onSubmit,
   onClose,
-  handleModalChange,
+  onLoginModal,
   name = "form",
 }) => {
   return (
@@ -24,7 +24,7 @@ const SignupModalWithForm = ({
             <button
               className="modal_login-button"
               type="button"
-              onClick={handleModalChange}
+              onClick={onLoginModal}
             >
               or Log In
             </button>

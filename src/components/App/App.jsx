@@ -184,7 +184,13 @@ function App() {
     );
   };
   const MainRoute = ({ Main }) => {
-    return <Main weatherTemp={temp} initialClothes={clothingItems} />;
+    return (
+      <Main
+        weatherTemp={temp}
+        onSelectCard={handleSelectedCard}
+        initialClothes={clothingItems}
+      />
+    );
   };
   return (
     <div className="App">
@@ -201,16 +207,17 @@ function App() {
                 onLoginModal={handleLoginModal}
                 onRegisterModal={handleRegisterModal}
                 location={city}
+                isLoggedIn={isLoggedIn}
               />
             )}
-            <Header
-              onCreateModal={handleCreateModal}
-              onLoginModal={handleLoginModal}
-              onRegisterModal={handleRegisterModal}
-              location={city}
-              isLoggedIn={isLoggedIn}
-            />
-
+            {!isLoggedIn && (
+              <Header
+                onCreateModal={handleCreateModal}
+                onLoginModal={handleLoginModal}
+                onRegisterModal={handleRegisterModal}
+                location={city}
+              />
+            )}
             <Routes>
               <Route
                 exact
