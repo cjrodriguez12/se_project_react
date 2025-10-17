@@ -27,6 +27,10 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({
+    error: false,
+    message: "",
+  });
   const [currentUser, setCurrentUser] = useState({
     email: "",
     password: "",
@@ -75,6 +79,7 @@ function App() {
       .catch((err) => {
         console.error(`Error: ${err.status}`);
         setIsLoggedIn(false);
+        setErrorMessage({ error: true, message: err.message });
         setCurrentUser({});
       });
   };
@@ -251,6 +256,7 @@ function App() {
               <LoginModal
                 handleCloseModal={handleCloseModal}
                 onLogin={handleLogin}
+                errorMessage={errorMessage}
                 isOpen={activeModal === "login"}
                 onRegisterModal={handleRegisterModal}
               />

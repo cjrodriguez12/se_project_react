@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import LoginModalWithForm from "../LoginModal/ModalWithForm";
 
-const LoginModal = ({ handleCloseModal, onLogin, isOpen, onRegisterModal }) => {
+const LoginModal = ({
+  handleCloseModal,
+  onLogin,
+  isOpen,
+  onRegisterModal,
+  errorMessage,
+}) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,7 +22,14 @@ const LoginModal = ({ handleCloseModal, onLogin, isOpen, onRegisterModal }) => {
     e.preventDefault();
     onLogin({ email, password });
   };
-
+  //error message handler () needs to be fixed to show error message in the modal
+  const handleErrorMessage = () => {
+    return errorMessage ? (
+      <span className="modal__error">{errorMessage}</span>
+    ) : (
+      ""
+    );
+  };
   useEffect(() => {
     if (isOpen === true) {
       setEmail("");
