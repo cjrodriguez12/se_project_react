@@ -25,15 +25,11 @@ const LoginModal = ({
   //error message handler () needs to be fixed to show error message in the modal
 
   const handleErrorMessage = () => {
-    const errorMessage = errorMessage.error;
     if (!errorMessage) {
       return null;
-    } else
-      return errorMessage ? (
-        <span className="modal__error">{errorMessage}</span>
-      ) : (
-        "Email or password is incorrect"
-      );
+    } else setErrorMessage(false);
+    return;
+    <div className="modal__error-check">"Email or password is incorrect"</div>;
   };
   useEffect(() => {
     if (isOpen === true) {
