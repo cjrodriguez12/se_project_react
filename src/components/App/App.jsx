@@ -104,37 +104,36 @@ function App() {
   // Function to handle user sign-in
   // This function logs in the user and updates the current user context
   const handleSignIn = (userData) => {
-    loginUser(userData.email, userData.password)
-      .then((res) => {
-        if (res.token) {
-          userData.token = res.token;
-          setIsLoggedIn(true);
-          handleCloseModal();
-        } else {
+    loginUser(userData.email, userData.password).then((res) => {
+      if (res.token) {
+        userData.token = res.token;
+        setIsLoggedIn(true);
+        handleCloseModal();
+      } else {
+        setIsLoggedIn(false);
+        setCurrentUser({});
+      }
+      localStorage.setItem("jwt", res.token);
+      setCurrentUser(userData);
+    });
+    return loginUser(userData.email, userData.password).then((res) => {
+      getUserData(res.token)
+        .then((res) => {
+          setCurrentUser((prevUser) => ({
+            ...prevUser,
+            email: res.email,
+            password: res.password,
+            name: res.name,
+            avatar: res.avatar,
+          }));
+          return res;
+        })
+        .catch((err) => {
           setIsLoggedIn(false);
-        }
-        localStorage.setItem("jwt", res.token);
-        setCurrentUser(userData);
-        return res;
-      })
-      .then((res) => {
-        getUserData(res.token)
-          .then((res) => {
-            setCurrentUser((prevUser) => ({
-              ...prevUser,
-              email: res.email,
-              password: res.password,
-              name: res.name,
-              avatar: res.avatar,
-            }));
-            return res;
-          })
-          .catch((err) => {
-            setIsLoggedIn(false);
-            setCurrentUser({});
-            console.error(`Error: ${err.status}`);
-          });
-      });
+          setCurrentUser({});
+          console.error(`Error: ${err.status}`);
+        });
+    });
   };
 
   const handleDeleteCard = () => {
