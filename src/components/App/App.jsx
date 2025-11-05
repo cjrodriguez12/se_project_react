@@ -59,6 +59,7 @@ function App() {
     setActiveModal("register");
   };
   const handleLoginModal = () => {
+    errorMessage.error && setErrorMessage({ error: false, message: "" });
     setActiveModal("login");
   };
   useEffect(() => {

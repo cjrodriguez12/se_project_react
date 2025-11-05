@@ -23,34 +23,22 @@ const LoginModal = ({
     onLogin({ email, password });
   };
   //error message handler () needs to be fixed to show error message in the modal
-  const handleErrorMessage = () => {
-    return (
-      errorMessage.error && (
-        <div className="passwordErrorMessage">
-          Email or Password is Incorrect
-        </div>
-      )
-    );
-  };
-  const handleClearErrorMessage = () => {
-    return errorMessage.error && errorMessage.clearError();
-  };
   const [passwordFormLabel, setPasswordFormLabel] = useState("Password");
-  handleIncorrectLogin = () => {
-    if (errorMessage.error) {
-      setPasswordFormLabel("Incorrect Password");
-      handleClearErrorMessage();
-      return passwordFormLabel;
-    }
-    setPasswordFormLabel("Password");
-    return passwordFormLabel;
-  };
   useEffect(() => {
     if (isOpen === true) {
       setEmail("");
       setPassword("");
+      setPasswordFormLabel("Password");
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!errorMessage.error) {
+      setPasswordFormLabel("Password");
+    } else {
+      setPasswordFormLabel("Incorrect Password");
+    }
+  }, [errorMessage.error]);
 
   return (
     <LoginModalWithForm
@@ -74,7 +62,7 @@ const LoginModal = ({
         ></input>
       </label>
       <label className="modal_form-label">
-        {handleIncorrectLogin()}
+        {passwordFormLabel}
         <input
           className="modal_form-input"
           placeholder="Password"
@@ -85,8 +73,12 @@ const LoginModal = ({
           value={password}
           onChange={handlePassChange}
         ></input>
-        {handleErrorMessage()}
       </label>
+      {errorMessage.error && (
+        <div className="passwordErrorMessage">
+          Email or Password is Incorrect
+        </div>
+      )}
     </LoginModalWithForm>
   );
 };
