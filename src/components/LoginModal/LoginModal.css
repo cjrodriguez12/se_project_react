@@ -8,6 +8,9 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  font-style: bold;
+  line-height: 20px;
 }
 .modal__content {
   background-color: white;
@@ -92,4 +95,7 @@
 .modal_register-button:hover {
   cursor: pointer;
   background-color: lightgrey;
+}
+.passwordErrorMessage {
+  color: rgba(255, 77, 0, 1);
 }
