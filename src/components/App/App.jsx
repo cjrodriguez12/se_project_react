@@ -116,9 +116,9 @@ function App() {
       }
       localStorage.setItem("jwt", res.token);
       setCurrentUser(userData);
-      return currentUser;
+      return userData;
     });
-    return currentUser.then((res) => {
+    return userData.then((res) => {
       getUserData(res.token)
         .then((res) => {
           setCurrentUser((prevUser) => ({
