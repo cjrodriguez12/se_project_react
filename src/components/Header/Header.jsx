@@ -11,6 +11,7 @@ const Header = ({
   onLoginModal,
   onRegisterModal,
   isLoggedIn,
+  currentUser,
 }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -41,7 +42,7 @@ const Header = ({
 
         {isLoggedIn && (
           <NavLink to="/profile" className="header__avatar-name">
-            Charlie Rodriguez
+            {currentUser.name}
           </NavLink>
         )}
         {!isLoggedIn && (
@@ -55,7 +56,11 @@ const Header = ({
           </div>
         )}
         {isLoggedIn && (
-          <img className="header__avatar-img" src={avatar} alt="avatar" />
+          <img
+            className="header__avatar-img"
+            src={currentUser.avatar}
+            alt="avatar"
+          />
         )}
       </div>
     </header>

@@ -109,6 +109,14 @@ function App() {
       if (res.token) {
         userData.token = res.token;
         setIsLoggedIn(true);
+        getUserData(res.token);
+        setCurrentUser((prevUser) => ({
+          ...prevUser,
+          email: res.email,
+          password: res.password,
+          name: res.name,
+          avatar: res.avatar,
+        }));
         handleCloseModal();
       } else {
         setIsLoggedIn(false);
@@ -116,28 +124,9 @@ function App() {
       }
       localStorage.setItem("jwt", res.token);
       setCurrentUser(userData);
-      return userData;
-    });
-    return userData.then((res) => {
-      getUserData(res.token)
-        .then((res) => {
-          setCurrentUser((prevUser) => ({
-            ...prevUser,
-            email: res.email,
-            password: res.password,
-            name: res.name,
-            avatar: res.avatar,
-          }));
-          return res;
-        })
-        .catch((err) => {
-          setIsLoggedIn(false);
-          setCurrentUser({});
-          console.error(`Error: ${err.status}`);
-        });
+      return res;
     });
   };
-
   const handleDeleteCard = () => {
     deleteCards(selectedCard._id)
       .then((res) => {
@@ -214,6 +203,7 @@ function App() {
                 onRegisterModal={handleRegisterModal}
                 location={city}
                 isLoggedIn={isLoggedIn}
+                currentUser={currentUser}
               />
             )}
             {!isLoggedIn && (
@@ -277,5 +267,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
