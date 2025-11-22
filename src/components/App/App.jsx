@@ -19,6 +19,7 @@ import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import { use } from "react";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -47,6 +48,31 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
+  }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      getUserData(token)
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            setCurrentUser({
+              email: res.email,
+              name: res.name,
+              avatar: res.avatar,
+              _id: res._id,
+            });
+          } else {
+            setIsLoggedIn(false);
+            setCurrentUser({});
+          }
+        })
+        .catch((err) => {
+          console.error(`Error: ${err.status}`);
+          setIsLoggedIn(false);
+          setCurrentUser({});
+        });
+    }
   }, []);
   //close modal when user logs in
   const handleCloseModal = () => {
@@ -109,21 +135,20 @@ function App() {
       if (res.token) {
         userData.token = res.token;
         setIsLoggedIn(true);
-        getUserData(res.token);
-        setCurrentUser((prevUser) => ({
-          ...prevUser,
-          email: res.email,
-          password: res.password,
-          name: res.name,
-          avatar: res.avatar,
-        }));
+        getUserData(res.token).then((res) => {
+          setCurrentUser({
+            email: res.email,
+            name: res.name,
+            avatar: res.avatar,
+            _id: res._id,
+          });
+        });
         handleCloseModal();
+        localStorage.setItem("jwt", res.token);
       } else {
         setIsLoggedIn(false);
         setCurrentUser({});
       }
-      localStorage.setItem("jwt", res.token);
-      setCurrentUser(userData);
       return res;
     });
   };
@@ -246,7 +271,7 @@ function App() {
             {activeModal === "login" && (
               <LoginModal
                 handleCloseModal={handleCloseModal}
-                onLogin={handleLogin}
+                onLogin={handleSignIn}
                 errorMessage={errorMessage}
                 isOpen={activeModal === "login"}
                 onRegisterModal={handleRegisterModal}

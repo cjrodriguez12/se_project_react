@@ -33,6 +33,9 @@
 }
 .header__avatar-img {
   padding-left: 12px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 }
 .header__avatar-name {
   margin-left: 20px;
