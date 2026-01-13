@@ -1,5 +1,6 @@
 import "./ItemModal.css";
-const ItemModal = ({ selectedCard, onClose, deleteCard }) => {
+const ItemModal = ({ selectedCard, onClose, deleteCard, currentUser }) => {
+  const isOwn = selectedCard.owner === currentUser._id;
   return (
     <div className={`modal`}>
       <div className="modal_preview">
@@ -13,15 +14,16 @@ const ItemModal = ({ selectedCard, onClose, deleteCard }) => {
         </div>
         <div className="modal_preview-weather">
           Weather: {selectedCard.weather}
-          <button
-            className="modal_item-delete"
-            type="button"
-            onClick={deleteCard}
-          >
-            Delete Item
-          </button>
+          {isOwn && (
+            <button
+              className="modal_item-delete"
+              type="button"
+              onClick={deleteCard}
+            >
+              Delete Item
+            </button>
+          )}
         </div>
-
         <button
           className="modal_preview-close"
           type="button"
