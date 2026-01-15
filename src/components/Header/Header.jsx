@@ -56,8 +56,13 @@ const Header = ({
           </div>
         )}
         {isLoggedIn && (
-          <div className="header__avatar-circle">
-            {!currentUser.avatar && <img src={avatar} alt="avatar" />}
+          <div className="header__image-container">
+            {!currentUser.avatar && (
+              <p>
+                {currentUser.name.charAt(0).toUpperCase() +
+                  currentUser.name.slice(1)}
+              </p>
+            )}
             {currentUser.avatar && (
               <img
                 className="header__avatar-img"
@@ -67,15 +72,6 @@ const Header = ({
             )}
           </div>
         )}
-        {/* <div className="header__avatar-image-container">
-          {!isLoggedIn && <img src={avatar} alt="avatar" />}
-          {isLoggedIn && currentUser.avatar && (
-          <img
-            className="header__avatar-img"
-            src={currentUser.avatar}
-            alt="avatar"
-          />
-        )} */}
       </div>
     </header>
   );
