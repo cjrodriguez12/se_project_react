@@ -12,11 +12,12 @@ export const deleteCards = (id) => {
   }).then(processServerResponse);
 };
 //Adds new Card to database
-export const postCards = (itemCard) => {
+
+export const postCards = (itemCard, token) => {
   const { name, imageUrl, weather } = itemCard;
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: headers,
+    headers: { ...headers, Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       name,
       imageUrl,

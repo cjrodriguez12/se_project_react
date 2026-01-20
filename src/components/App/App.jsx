@@ -13,13 +13,11 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
-
 import RegisterModal from "../SignupModal/SignupModal.jsx";
 import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
 import LoginModal from "../LoginModal/LoginModal.jsx";
-import { use } from "react";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -170,7 +168,7 @@ function App() {
     setSelectedCard(card);
   };
   const onAddItem = (addItem) => {
-    postCards(addItem)
+    postCards(addItem, token)
       .then((res) => {
         setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
