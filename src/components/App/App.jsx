@@ -114,7 +114,7 @@ function App() {
       userData.email,
       userData.password,
       userData.name,
-      userData.imageUrl
+      userData.imageUrl,
     )
       .then((userData) => {
         handleSignIn(userData);
@@ -168,7 +168,7 @@ function App() {
     setSelectedCard(card);
   };
   const onAddItem = (addItem) => {
-    postCards(addItem, token)
+    postCards(addItem)
       .then((res) => {
         setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();

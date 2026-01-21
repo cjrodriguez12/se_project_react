@@ -31,3 +31,13 @@ export const getUserData = (token) => {
     headers: { ...headers, Authorization: `Bearer ${token}` },
   }).then(processServerResponse);
 };
+export const updateUserData = (token, name, avatar) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: { ...headers, Authorization: `Bearer ${token}` },
+    body: JSON.stringify({
+      name,
+      avatar,
+    }),
+  }).then(processServerResponse);
+};
