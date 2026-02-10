@@ -282,6 +282,7 @@ function App() {
                 selectedCard={selectedCard}
                 onClose={handleCloseModal}
                 deleteCard={handleDeleteCard}
+                currentUser={currentUser}
               />
             )}
           </CurrentTemperatureUnitContext.Provider>
