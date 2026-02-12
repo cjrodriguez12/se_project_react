@@ -1,12 +1,12 @@
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 
-const Profile = ({ onSelectCard, initialClothes, onCreateModal }) => {
+const Profile = ({ onSelectCard, clothingItems, onCreateModal }) => {
   return (
     <section className="profile">
       <SideBar />
       <ClothesSection
-        initialClothes={initialClothes}
+        clothingItems={clothingItems}
         onSelectCard={onSelectCard}
         onCreateModal={onCreateModal}
       />

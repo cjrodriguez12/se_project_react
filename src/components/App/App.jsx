@@ -72,6 +72,7 @@ function App() {
         });
     }
   }, []);
+
   //close modal when user logs in
   const handleCloseModal = () => {
     setActiveModal("");
@@ -206,7 +207,7 @@ function App() {
       <Main
         weatherTemp={temp}
         onSelectCard={handleSelectedCard}
-        initialClothes={clothingItems}
+        clothingItems={clothingItems}
       />
     );
   };

@@ -1,7 +1,7 @@
 import ItemCard from "../ItemCard/ItemCard";
 import "../Profile/Profile.css";
 
-const ClothesSection = ({ onSelectCard, initialClothes, onCreateModal }) => {
+const ClothesSection = ({ onSelectCard, clothingItems, onCreateModal }) => {
   return (
     <div className="profile__card_section">
       <div className="profile_title">
@@ -11,7 +11,7 @@ const ClothesSection = ({ onSelectCard, initialClothes, onCreateModal }) => {
         </button>
       </div>
       <div className="profile__card_items">
-        {initialClothes.map((item) => (
+        {clothingItems.map((item) => (
           <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
         ))}
       </div>
