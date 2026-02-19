@@ -1,7 +1,14 @@
-const editModal = ({ handleCloseModal, isOpen, onSubmit }) => {
+import EditModalWithForm from "./ModalwithForm";
+import { useState, useEffect } from "react";
+const EditModal = ({ handleCloseModal, isOpen, onSubmit }) => {
   const [name, setName] = useState("");
   const [imageUrl, setUrl] = useState("");
-
+  useEffect(() => {
+    if (isOpen === true) {
+      setName("");
+      setUrl("");
+    }
+  }, [isOpen]);
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -14,12 +21,7 @@ const editModal = ({ handleCloseModal, isOpen, onSubmit }) => {
     e.preventDefault();
     onSubmit({ name, imageUrl });
   };
-    useEffect(() => {
-      if (isOpen === true) {
-        setName("");
-        setUrl("");
-      }
-    }, [isOpen]);
+
   return (
     <EditModalWithForm
       title="Changle Profile Data"
@@ -56,4 +58,4 @@ const editModal = ({ handleCloseModal, isOpen, onSubmit }) => {
     </EditModalWithForm>
   );
 };
-export default editModal;
+export default EditModal;
