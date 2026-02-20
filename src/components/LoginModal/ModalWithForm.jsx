@@ -8,8 +8,6 @@ const LoginModalWithForm = ({
   onRegisterModal,
   name = "form",
 }) => {
-  console.log("onRegisterModal function:", onRegisterModal);
-
   return (
     <div className={`modal modal_type_${name}`}>
       <div className="modal__content">
@@ -27,7 +25,6 @@ const LoginModalWithForm = ({
               className="modal_register-button"
               type="button"
               onClick={() => {
-                console.log("Sign up button clicked!");
                 onRegisterModal();
               }}
             >

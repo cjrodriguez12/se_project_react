@@ -18,6 +18,7 @@ import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import EditModal from "../SideBar/editModal.jsx";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -86,6 +87,9 @@ function App() {
   const handleLoginModal = () => {
     errorMessage.error && setErrorMessage({ error: false, message: "" });
     setActiveModal("login");
+  };
+  const handleEditProfileModal = () => {
+    setActiveModal("edit");
   };
   useEffect(() => {
     if (isLoggedIn) {
@@ -181,6 +185,14 @@ function App() {
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
+  const handleProfileEdit = (profileData) => {
+    setCurrentUser({
+      ...currentUser,
+      name: profileData.name,
+      avatar: profileData.imageUrl,
+    });
+    handleCloseModal();
+  };
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
@@ -249,6 +261,8 @@ function App() {
               <Route
                 path="/profile"
                 element={<ProtectedRoute Profile={Profile} />}
+                onEditProfileModal={handleEditProfileModal}
+                currentUser={currentUser}
               ></Route>
             </Routes>
 
@@ -283,6 +297,14 @@ function App() {
                 selectedCard={selectedCard}
                 onClose={handleCloseModal}
                 deleteCard={handleDeleteCard}
+                currentUser={currentUser}
+              />
+            )}
+            {activeModal === "edit" && (
+              <EditModal
+                handleCloseModal={handleCloseModal}
+                isOpen={activeModal === "edit"}
+                onSubmit={handleProfileEdit}
                 currentUser={currentUser}
               />
             )}
