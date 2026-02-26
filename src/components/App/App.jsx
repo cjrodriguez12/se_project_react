@@ -18,7 +18,7 @@ import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
 import LoginModal from "../LoginModal/LoginModal.jsx";
-import EditModal from "../SideBar/editModal.jsx";
+import EditModal from "../EditProfileModal/EditModal.jsx";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -261,8 +261,8 @@ function App() {
               <Route
                 path="/profile"
                 element={<ProtectedRoute Profile={Profile} />}
-                onEditProfileModal={handleEditProfileModal}
                 currentUser={currentUser}
+                onEditProfileModal={handleEditProfileModal}
               ></Route>
             </Routes>
 
@@ -290,7 +290,13 @@ function App() {
                 onRegisterModal={handleRegisterModal}
               />
             )}
-
+            {activeModal === "edit" && (
+              <EditModal
+                handleCloseModal={handleCloseModal}
+                isOpen={activeModal === "edit"}
+                currentUser={currentUser}
+              />
+            )}
             <Footer />
             {activeModal === "preview" && (
               <ItemModal
@@ -298,14 +304,7 @@ function App() {
                 onClose={handleCloseModal}
                 deleteCard={handleDeleteCard}
                 currentUser={currentUser}
-              />
-            )}
-            {activeModal === "edit" && (
-              <EditModal
-                handleCloseModal={handleCloseModal}
-                isOpen={activeModal === "edit"}
-                onSubmit={handleProfileEdit}
-                currentUser={currentUser}
+                onEditProfileModal={handleEditProfileModal}
               />
             )}
           </CurrentTemperatureUnitContext.Provider>

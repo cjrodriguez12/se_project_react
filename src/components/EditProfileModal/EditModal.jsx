@@ -1,12 +1,6 @@
 import EditModalWithForm from "./ModalwithForm";
 import { useState, useEffect } from "react";
-const EditModal = ({
-  handleCloseModal,
-  isOpen,
-  onSubmit,
-  currentUser,
-  onEditProfileModal,
-}) => {
+const EditModal = ({ isOpen, handleCloseModal, currentUser }) => {
   const [name, setName] = useState("");
   const [imageUrl, setUrl] = useState("");
 
@@ -20,21 +14,20 @@ const EditModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, imageUrl });
   };
   useEffect(() => {
     if (isOpen === true) {
-      setName("");
-      setUrl("");
+      setName(currentUser.name);
+      setUrl(currentUser.avatar);
     }
   }, [isOpen]);
   return (
     <EditModalWithForm
-      title="Changle Profile Data"
+      title="Change Profile Data"
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      onEditProfileModal={onEditProfileModal}
+      currentUser={currentUser}
     >
       <label className="modal_form-label">
         Name
