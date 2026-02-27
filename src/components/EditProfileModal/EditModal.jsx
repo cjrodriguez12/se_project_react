@@ -1,6 +1,12 @@
 import EditModalWithForm from "./ModalwithForm";
 import { useState, useEffect } from "react";
-const EditModal = ({ isOpen, handleCloseModal, currentUser }) => {
+
+const EditModal = ({
+  isOpen,
+  handleCloseModal,
+  currentUser,
+  handleProfileEdit,
+}) => {
   const [name, setName] = useState("");
   const [imageUrl, setUrl] = useState("");
 
@@ -14,6 +20,7 @@ const EditModal = ({ isOpen, handleCloseModal, currentUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleProfileEdit({ name, imageUrl });
   };
   useEffect(() => {
     if (isOpen === true) {

@@ -211,6 +211,8 @@ function App() {
         currentUser={currentUser}
         clothingItems={clothingItems}
         onSelectCard={handleSelectedCard}
+        onEditProfileModal={handleEditProfileModal}
+        onCreateModal={handleCreateModal}
       />
     );
   };
@@ -254,15 +256,14 @@ function App() {
               <Route
                 exact
                 path="/"
-                element={<MainRoute Main={Main} />}
-                onSelectCard={handleSelectedCard}
+                element={
+                  <MainRoute Main={Main} onSelectCard={handleSelectedCard} />
+                }
               ></Route>
 
               <Route
                 path="/profile"
                 element={<ProtectedRoute Profile={Profile} />}
-                currentUser={currentUser}
-                onEditProfileModal={handleEditProfileModal}
               ></Route>
             </Routes>
 
@@ -295,6 +296,7 @@ function App() {
                 handleCloseModal={handleCloseModal}
                 isOpen={activeModal === "edit"}
                 currentUser={currentUser}
+                handleProfileEdit={handleProfileEdit}
               />
             )}
             <Footer />
