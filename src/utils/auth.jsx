@@ -31,7 +31,8 @@ export const getUserData = (token) => {
     headers: { ...headers, Authorization: `Bearer ${token}` },
   }).then(processServerResponse);
 };
-export const updateUserData = (token, name, avatar) => {
+export const updateUserData = (name, avatar) => {
+  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: { ...headers, Authorization: `Bearer ${token}` },

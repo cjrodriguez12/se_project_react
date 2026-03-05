@@ -14,7 +14,12 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
 import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
 import RegisterModal from "../SignupModal/SignupModal.jsx";
-import { loginUser, registerUser, getUserData } from "../../utils/auth.jsx";
+import {
+  loginUser,
+  registerUser,
+  getUserData,
+  updateUserData,
+} from "../../utils/auth.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.js/CurrentUserContext.jsx";
 //json-server --watch db.json --id _id --port 3001
 import LoginModal from "../LoginModal/LoginModal.jsx";
@@ -48,6 +53,7 @@ function App() {
         console.error(err);
       });
   }, []);
+  // Check for JWT token and fetch user data on component mount
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
@@ -155,6 +161,7 @@ function App() {
       return res;
     });
   };
+  // Function to handle card deletion
   const handleDeleteCard = () => {
     deleteCards(selectedCard._id)
       .then((res) => {
@@ -168,10 +175,12 @@ function App() {
         console.log(err);
       });
   };
+  // Function to handle card selection and open the preview modal
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
+  // Function to handle adding a new item card
   const onAddItem = (addItem) => {
     postCards(addItem)
       .then((res) => {
@@ -182,10 +191,13 @@ function App() {
         console.log(err);
       });
   };
+  // Function to handle temperature unit toggle
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
+  // Function to handle profile editing
   const handleProfileEdit = (profileData) => {
+    updateUserData(profileData.name, profileData.imageUrl);
     setCurrentUser({
       ...currentUser,
       name: profileData.name,
@@ -193,6 +205,33 @@ function App() {
     });
     handleCloseModal();
   };
+  // Function to handle card like/unlike
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        api
+          // the first argument is the card's id
+          .addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item)),
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        api
+          // the first argument is the card's id
+          .removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item)),
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+  // Fetch weather data on component mount
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
@@ -205,6 +244,7 @@ function App() {
         console.error(`Error: ${error.status}`);
       });
   }, []);
+  // ProtectedRoute component to render the Profile page for logged-in users
   const ProtectedRoute = ({ Profile }) => {
     return (
       <Profile
@@ -216,6 +256,7 @@ function App() {
       />
     );
   };
+  // MainRoute component to render the Main page with weather and clothing items
   const MainRoute = ({ Main }) => {
     return (
       <Main
