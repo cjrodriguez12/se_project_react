@@ -14,7 +14,6 @@ export const deleteCards = (id) => {
   }).then(processServerResponse);
 };
 //Adds new Card to database
-
 export const postCards = (itemCard) => {
   const { name, imageUrl, weather } = itemCard;
   const token = localStorage.getItem("jwt");
@@ -26,5 +25,13 @@ export const postCards = (itemCard) => {
       imageUrl,
       weather,
     }),
+  }).then(processServerResponse);
+};
+
+export const updateCardLikes = (id, isLiked) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: isLiked ? "DELETE" : "PUT",
+    headers: { ...headers, Authorization: `Bearer ${token}` },
   }).then(processServerResponse);
 };

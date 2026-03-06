@@ -12,7 +12,12 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
-import { getInitialCards, deleteCards, postCards } from "../../utils/api.jsx";
+import {
+  getInitialCards,
+  deleteCards,
+  postCards,
+  updateCardLikes,
+} from "../../utils/api.jsx";
 import RegisterModal from "../SignupModal/SignupModal.jsx";
 import {
   loginUser,
@@ -211,7 +216,7 @@ function App() {
     // Check if this card is not currently liked
     !isLiked
       ? // if so, send a request to add the user's id to the card's likes array
-        api
+        updateCardLikes
           // the first argument is the card's id
           .addCardLike(id, token)
           .then((updatedCard) => {
@@ -221,7 +226,7 @@ function App() {
           })
           .catch((err) => console.log(err))
       : // if not, send a request to remove the user's id from the card's likes array
-        api
+        updateCardLikes
           // the first argument is the card's id
           .removeCardLike(id, token)
           .then((updatedCard) => {
