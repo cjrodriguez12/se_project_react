@@ -28,7 +28,7 @@ export const postCards = (itemCard) => {
   }).then(processServerResponse);
 };
 
-export const updateCardLikes = (id, isLiked) => {
+export const updateCard = (id, isLiked) => {
   const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: isLiked ? "DELETE" : "PUT",

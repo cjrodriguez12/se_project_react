@@ -16,7 +16,7 @@ import {
   getInitialCards,
   deleteCards,
   postCards,
-  updateCardLikes,
+  updateCard,
 } from "../../utils/api.jsx";
 import RegisterModal from "../SignupModal/SignupModal.jsx";
 import {
@@ -29,6 +29,7 @@ import { CurrentUserContext } from "../../contexts/CurrentTempatureUnitContext.j
 //json-server --watch db.json --id _id --port 3001
 import LoginModal from "../LoginModal/LoginModal.jsx";
 import EditModal from "../EditProfileModal/EditModal.jsx";
+import ItemCard from "../ItemCard/ItemCard.jsx";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -216,8 +217,10 @@ function App() {
     // Check if this card is not currently liked
     !isLiked
       ? // if so, send a request to add the user's id to the card's likes array
-        updateCardLikes
-          // the first argument is the card's id
+
+        // the first argument is the card's id
+
+        updateCard
           .addCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
@@ -226,8 +229,10 @@ function App() {
           })
           .catch((err) => console.log(err))
       : // if not, send a request to remove the user's id from the card's likes array
-        updateCardLikes
-          // the first argument is the card's id
+
+        // the first argument is the card's id
+
+        updateCard
           .removeCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
@@ -258,6 +263,7 @@ function App() {
         onSelectCard={handleSelectedCard}
         onEditProfileModal={handleEditProfileModal}
         onCreateModal={handleCreateModal}
+        onCardLike={handleCardLike}
       />
     );
   };
@@ -268,6 +274,7 @@ function App() {
         weatherTemp={temp}
         onSelectCard={handleSelectedCard}
         clothingItems={clothingItems}
+        onCardLike={handleCardLike}
       />
     );
   };
@@ -289,6 +296,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 currentUser={currentUser}
               />
+              
             )}
             {!isLoggedIn && (
               <Header
