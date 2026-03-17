@@ -41,7 +41,7 @@ const Header = ({
 
         {isLoggedIn && (
           <NavLink to="/profile" className="header__avatar-name">
-            {currentUser.name}
+            {currentUser && currentUser.name}
           </NavLink>
         )}
         {!isLoggedIn && (
@@ -56,13 +56,16 @@ const Header = ({
         )}
         {isLoggedIn && (
           <div className="header__image-container">
-            {!currentUser.avatar && (
-              <p>
-                {currentUser.name.charAt(0).toUpperCase() +
-                  currentUser.name.slice(1)}
-              </p>
+            {currentUser && currentUser.name && (
+              <div className="header__avatar-name">
+                {currentUser.name
+                  .split(" ")[0]
+                  .charAt(0)
+                  .toUpperCase()
+                  .concat(currentUser.name.split(" ")[0].slice(1))}
+              </div>
             )}
-            {currentUser.avatar && (
+            {currentUser && currentUser.avatar && (
               <img
                 className="header__avatar-img"
                 src={currentUser.avatar}
