@@ -13,7 +13,12 @@
     "react-router-dom": "^6.0.0",
     "react-scripts": "5.0.1",
     "vite": "^6.3.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "form-data": ">=3.0.4",
+    "webpack-dev-server": ">=5.2.1",
+    "nth-check": ">=2.0.1",
+    "postcss": ">=8.4.21",
+    "react-refresh": "^0.14.0"
   },
   "scripts": {
     "start": "vite --open",
@@ -40,6 +45,11 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "form-data": ">=3.0.4",
+    "webpack-dev-server": ">=5.2.1",
+    "nth-check": ">=2.0.1",
+    "postcss": ">=8.4.21",
+    "react-refresh": "^0.14.0"
   }
 }
