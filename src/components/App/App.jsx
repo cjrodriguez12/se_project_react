@@ -296,7 +296,6 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 currentUser={currentUser}
               />
-              
             )}
             {!isLoggedIn && (
               <Header

@@ -1,4 +1,12 @@
 const ItemCard = ({ item, onSelectCard }) => {
+  const isLiked = item.likes.some((id) => id === currentUser._id);
+  handleCardLike = () => {
+    onCardLike(item);
+  };
+  const handleCardDelete = () => {
+    onCardDelete(item);
+  };
+  const itemLikeButtonClassName = `card_like-button ${isLiked && "card_like-button_active"}`;
   return (
     <ul className="card">
       <li>
