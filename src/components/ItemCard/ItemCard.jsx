@@ -1,6 +1,6 @@
-const ItemCard = ({ item, onSelectCard }) => {
+const ItemCard = ({ item, onSelectCard, onCardLike, onCardDelete }) => {
   const isLiked = item.likes.some((id) => id === currentUser._id);
-  handleCardLike = () => {
+  const handleCardLike = () => {
     onCardLike(item);
   };
   const handleCardDelete = () => {

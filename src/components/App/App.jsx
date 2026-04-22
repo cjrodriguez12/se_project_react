@@ -215,31 +215,34 @@ function App() {
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     // Check if this card is not currently liked
-    !isLiked
-      ? // if so, send a request to add the user's id to the card's likes array
+    (!isLiked)
+      // if so, send a request to add the user's id to the card's likes array
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === id ? updatedCard : item)),
+        );
+      })
+      .catch((err) => console.log(err))
 
-        // the first argument is the card's id
+      // the first argument is the card's id
 
-        updateCard
-          .addCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
-            );
-          })
-          .catch((err) => console.log(err))
-      : // if not, send a request to remove the user's id from the card's likes array
-
-        // the first argument is the card's id
-
-        updateCard
-          .removeCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
-            );
-          })
-          .catch((err) => console.log(err));
+      .then(updateCard)
+      .addCardLike(id, token)
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === id ? updatedCard : item)),
+        );
+      })
+      .catch((err) => console.log(err))
+      // if not, send a request to remove the user's id from the card's likes array
+      .then(updateCard)
+      .removeCardLike(id, token)
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === id ? updatedCard : item)),
+        );
+      })
+      .catch((err) => console.log(err));
   };
   // Fetch weather data on component mount
   useEffect(() => {
